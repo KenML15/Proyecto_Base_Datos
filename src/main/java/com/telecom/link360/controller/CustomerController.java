@@ -44,10 +44,19 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editCustomer(@PathVariable Integer id, Model model) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID de cliente inválido: " + id));
+        model.addAttribute("customer", customer);
+        return "customerForm";
+    }
+
     // BORRAR
     @GetMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable Integer id) {
         customerRepository.deleteById(id);
         return "redirect:/customers";
     }
+
 }
