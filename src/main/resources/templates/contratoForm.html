@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Contrato</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+<h2 class="mb-4">Datos del Contrato</h2>
+
+<form th:action="@{/contratos/save}" th:object="${contrato}" method="post" class="card p-4 shadow-sm">
+
+    <input type="hidden" th:field="*{numContrato}" />
+
+    <div class="mb-3" th:if="${contrato.numContrato != null}">
+        <label class="form-label text-muted">Nº de Contrato</label>
+        <input type="text" th:value="${contrato.numContrato}" class="form-control" readonly disabled />
+    </div>
+
+    <div class="mb-3" th:if="${contrato.numContrato == null}">
+        <label class="form-label">Nº de Contrato (Automático)</label>
+        <input type="text" class="form-control" readonly value="Se asignará automáticamente" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cliente *</label>
+        <select th:field="*{cliente}" class="form-control" required>
+            <option value="" disabled selected>Seleccione un cliente...</option>
+            <option th:each="c : ${clientes}"
+                    th:value="${c.id}"
+                    th:text="${c.firstName + ' ' + c.lastName1 + ' (ID: ' + c.id + ')'}">
+            </option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Plan Tarifario *</label>
+        <select th:field="*{plan}" class="form-control" required>
+            <option value="" disabled selected>Seleccione un plan...</option>
+            <option th:each="p : ${planes}"
+                    th:value="${p.id}"
+                    th:text="${p.nombre + ' - $' + #numbers.formatDecimal(p.cuotaMensual, 1, 2)}">
+            </option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha de Firma *</label>
+        <input type="date" th:field="*{fechaFirma}" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Plazo (Meses) *</label>
+        <input type="number" th:field="*{plazoMeses}" class="form-control" min="1" required/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Monto de Penalización ($) *</label>
+        <input type="number" step="0.01" th:field="*{montoPenalizacion}" class="form-control" required/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select th:field="*{status}" class="form-control" required>
+            <option value="A">Activo</option>
+            <option value="I">Inactivo</option>
+        </select>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success">Guardar Contrato</button>
+        <a href="/contratos" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

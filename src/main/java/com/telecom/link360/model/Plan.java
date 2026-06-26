@@ -42,8 +42,23 @@ public class Plan {
     @Column(name = "CreatedAt", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(name = "ModifiedBy", length = 50)
+    private String modifiedBy;
+
+    @Column(name = "ModifiedAt")
+    private LocalDateTime modifiedAt;
+
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getCodCategoria() {
         return codCategoria;
@@ -51,6 +66,22 @@ public class Plan {
 
     public void setCodCategoria(Integer codCategoria) {
         this.codCategoria = codCategoria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public BigDecimal getCuotaMensual() {
@@ -109,29 +140,20 @@ public class Plan {
         this.createdAt = createdAt;
     }
 
-    public Integer getId() {
-        return id;
+    public String getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
-    public String getNombre() {
-        return nombre;
+    public LocalDateTime getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public String getStatus() {

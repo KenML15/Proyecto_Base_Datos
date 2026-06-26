@@ -30,7 +30,7 @@ public class PlanController {
 
     @PostMapping("/save")
     public String savePlan(@ModelAttribute Plan plan) {
-        // 1. Generar ID manual
+        // 1. Generar ID manual si es nuevo
         if (plan.getId() == null) {
             Integer maxId = planRepository.findAll().stream()
                     .map(Plan::getId)
@@ -40,18 +40,26 @@ public class PlanController {
             plan.setId(maxId + 1);
         }
 
-        // 2. Asignar Categoría obligatoria (la que creaste en SQL)
+        // 2. Asignar Categoría obligatoria (defecto: 1)
         if (plan.getCodCategoria() == null) {
             plan.setCodCategoria(1);
         }
 
-        // 3. Auditoría
+        // 3. Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (plan.getCreatedBy() == null || plan.getCreatedBy().isEmpty()) {
             plan.setCreatedBy("admin");
         }
         if (plan.getCreatedAt() == null) {
             plan.setCreatedAt(LocalDateTime.now());
         }
+
+        // 4. Auditoría - ModifiedAt y ModifiedBy (para ediciones)
+        if (plan.getId() != null && planRepository.existsById(plan.getId())) {
+            plan.setModifiedBy("admin");
+            plan.setModifiedAt(LocalDateTime.now());
+        }
+
+        // 5. Status por defecto
         if (plan.getStatus() == null || plan.getStatus().isEmpty()) {
             plan.setStatus("A");
         }
@@ -63,9 +71,9 @@ public class PlanController {
     @GetMapping("/edit/{id}")
     public String editPlan(@PathVariable("id") Integer id, Model model) {
         Plan plan = planRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID de plan inválido:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("ID de plan inválido: " + id));
         model.addAttribute("plan", plan);
-        return "planForm"; // Reutiliza el mismo formulario que para crear
+        return "planForm";
     }
 
     @GetMapping("/delete/{id}")
