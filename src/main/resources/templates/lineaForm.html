@@ -1,69 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Registrar Línea Móvil</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Formulario de Línea Móvil · Link360</title>
+    <th:block th:replace="~{fragments :: headAssets}"></th:block>
 </head>
-<body class="container mt-5">
-<h2 class="mb-4">Nueva Línea Móvil</h2>
+<body>
 
-<form th:action="@{/lineas/save}" th:object="${linea}" method="post" class="card p-4 shadow-sm">
+<div th:replace="~{fragments :: navbar}"></div>
 
-  <div class="mb-3">
-    <label class="form-label">Número de Teléfono</label>
-    <input type="text" th:field="*{numeroTelefono}" class="form-control" required placeholder="Ej: 8888-8888"/>
-  </div>
+<div class="container l360-page l360-page-narrow">
+    <div class="page-header">
+        <div>
+            <h2><span class="page-header-icon"><i class="bi bi-sim-fill"></i></span> Nueva Línea Móvil</h2>
+            <p class="page-subtitle">Asigna una línea a un cliente y configura sus datos técnicos.</p>
+        </div>
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label">Cliente Asignado</label>
-    <select th:field="*{customer.id}" class="form-control" required>
-      <option value="" disabled selected>Seleccione un cliente...</option>
-      <option th:each="c : ${customers}"
-              th:value="${c.id}"
-              th:text="${c.firstName + ' ' + c.lastName1}">
-      </option>
-    </select>
-  </div>
+    <form th:action="@{/lineas/save}" th:object="${linea}" method="post" class="l360-card form-card">
 
-  <div class="mb-3">
-    <label class="form-label">Estado</label>
-    <select th:field="*{estado}" class="form-control" required>
-      <option value="A">Activo</option>
-      <option value="I">Inactivo</option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-telephone"></i> Número de Teléfono</label>
+            <input type="text" th:field="*{numeroTelefono}" class="form-control" required placeholder="Ej: 8888-8888"/>
+        </div>
 
-  <div class="mb-3">
-    <label class="form-label">Tipo de Línea</label>
-    <select th:field="*{tipoLinea}" class="form-control" required>
-      <option value="Prepago">Prepago</option>
-      <option value="Postpago">Postpago</option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Cliente Asignado</label>
+            <select th:field="*{customer.id}" class="form-control" required>
+                <option value="" disabled selected>Seleccione un cliente...</option>
+                <option th:each="c : ${customers}"
+                        th:value="${c.id}"
+                        th:text="${c.firstName + ' ' + c.lastName1}">
+                </option>
+            </select>
+        </div>
 
-  <div class="mb-3">
-    <label class="form-label">Fecha de Activación</label>
-    <input type="date" th:field="*{fechaActivacion}" class="form-control" required/>
-  </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
+            <select th:field="*{estado}" class="form-control" required>
+                <option value="A">Activo</option>
+                <option value="I">Inactivo</option>
+            </select>
+        </div>
 
-  <div class="mb-3">
-    <label class="form-label">Tipo de SIM</label>
-    <select th:field="*{tipoSIM}" class="form-control" required>
-      <option value="Fisica">Física</option>
-      <option value="eSIM">eSIM</option>
-    </select>
-  </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-credit-card-2-front"></i> Tipo de Línea</label>
+            <select th:field="*{tipoLinea}" class="form-control" required>
+                <option value="Prepago">Prepago</option>
+                <option value="Postpago">Postpago</option>
+            </select>
+        </div>
 
-  <div class="mb-3">
-    <label class="form-label">Tecnología</label>
-    <input type="text" th:field="*{tecnologia}" class="form-control" required placeholder="Ej: 5G"/>
-  </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Activación</label>
+            <input type="date" th:field="*{fechaActivacion}" class="form-control" required/>
+        </div>
 
-  <div class="d-grid gap-2">
-    <button type="submit" class="btn btn-success">Guardar Línea</button>
-    <a href="/lineas" class="btn btn-outline-secondary">Cancelar</a>
-  </div>
-</form>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-sim"></i> Tipo de SIM</label>
+            <select th:field="*{tipoSIM}" class="form-control" required>
+                <option value="Fisica">Física</option>
+                <option value="eSIM">eSIM</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-broadcast"></i> Tecnología</label>
+            <input type="text" th:field="*{tecnologia}" class="form-control" required placeholder="Ej: 5G"/>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Línea</button>
+            <a href="/lineas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

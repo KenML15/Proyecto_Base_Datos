@@ -1,78 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Formulario de Cliente</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Formulario de Cliente · Link360</title>
+    <th:block th:replace="~{fragments :: headAssets}"></th:block>
 </head>
-<body class="container mt-5">
-<h2 class="mb-4">Datos del Cliente</h2>
+<body>
 
-<form th:action="@{/customers/save}" th:object="${customer}" method="post" class="card p-4 shadow-sm">
+<div th:replace="~{fragments :: navbar}"></div>
 
-    <input type="hidden" th:field="*{id}" />
-
-    <div class="mb-3" th:if="${customer.id != null}">
-        <label class="form-label text-muted">ID de Sistema</label>
-        <input type="text" th:value="${customer.id}" class="form-control" readonly disabled />
+<div class="container l360-page l360-page-narrow">
+    <div class="page-header">
+        <div>
+            <h2><span class="page-header-icon"><i class="bi bi-person-vcard-fill"></i></span> Datos del Cliente</h2>
+            <p class="page-subtitle">Completa la información para registrar o actualizar un cliente.</p>
+        </div>
     </div>
 
-    <div class="mb-3" th:if="${customer.id == null}">
-        <label class="form-label">ID Cliente (Numérico)</label>
-        <input type="number" th:field="*{id}" class="form-control" required/>
-    </div>
+    <form th:action="@{/customers/save}" th:object="${customer}" method="post" class="l360-card form-card">
 
-    <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        <input type="text" th:field="*{firstName}" class="form-control" required/>
-    </div>
+        <input type="hidden" th:field="*{id}" />
 
-    <div class="mb-3">
-        <label class="form-label">Primer Apellido</label>
-        <input type="text" th:field="*{lastName1}" class="form-control" required/>
-    </div>
+        <div class="mb-3" th:if="${customer.id != null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> ID de Sistema</label>
+            <input type="text" th:value="${customer.id}" class="form-control" readonly disabled />
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Segundo Apellido</label>
-        <input type="text" th:field="*{lastName2}" class="form-control"/>
-    </div>
+        <div class="mb-3" th:if="${customer.id == null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> ID Cliente (Numérico)</label>
+            <input type="number" th:field="*{id}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Dirección</label>
-        <input type="text" th:field="*{direccion}" class="form-control" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Nombre</label>
+            <input type="text" th:field="*{firstName}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Correo</label>
-        <input type="email" th:field="*{email}" class="form-control" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Primer Apellido</label>
+            <input type="text" th:field="*{lastName1}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Fecha de Ingreso</label>
-        <input type="date" th:field="*{fechaIngreso}" class="form-control" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Segundo Apellido</label>
+            <input type="text" th:field="*{lastName2}" class="form-control"/>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Tipo de Cliente</label>
-        <select th:field="*{customerType}" class="form-control" required>
-            <option value="Regular">Regular</option>
-            <option value="Empresarial">Empresarial</option>
-            <option value="VIP">VIP</option>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-geo-alt"></i> Dirección</label>
+            <input type="text" th:field="*{direccion}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label">Estado</label>
-        <select th:field="*{status}" class="form-control" required>
-            <option value="A">Activo</option>
-            <option value="I">Inactivo</option>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-envelope"></i> Correo</label>
+            <input type="email" th:field="*{email}" class="form-control" required/>
+        </div>
 
-    <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-success">Guardar Cliente</button>
-        <a href="/customers" class="btn btn-outline-secondary">Cancelar</a>
-    </div>
-</form>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Ingreso</label>
+            <input type="date" th:field="*{fechaIngreso}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person-badge"></i> Tipo de Cliente</label>
+            <select th:field="*{customerType}" class="form-control" required>
+                <option value="Regular">Regular</option>
+                <option value="Empresarial">Empresarial</option>
+                <option value="VIP">VIP</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
+            <select th:field="*{status}" class="form-control" required>
+                <option value="A">Activo</option>
+                <option value="I">Inactivo</option>
+            </select>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Cliente</button>
+            <a href="/customers" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
