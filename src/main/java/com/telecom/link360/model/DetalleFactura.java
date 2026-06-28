@@ -1,21 +1,29 @@
 package com.telecom.link360.model;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "AMBITO")
-public class Ambito {
+@Table(name = "DETALLE_FACTURA")
+@IdClass(DetalleFacturaId.class)
+public class DetalleFactura {
 
     @Id
-    @Column(name = "CodAmbito")
-    private Integer codAmbito;
+    @ManyToOne
+    @JoinColumn(name = "NumFactura", nullable = false)
+    private Factura factura;
 
-    @Column(name = "Nombre", nullable = false, length = 50)
-    private String nombre;
+    @Id
+    @Column(name = "Id_LineaDetalle")
+    private Integer idLineaDetalle;
 
-    @Column(name = "Descripcion", length = 255)
-    private String descripcion;
+    @ManyToOne
+    @JoinColumn(name = "Id_Consumo", nullable = false)
+    private Consumo consumo;
+
+    @Column(name = "MontoCobrado", nullable = false, precision = 12, scale = 2)
+    private BigDecimal montoCobrado;
 
     @Column(name = "CreatedBy", nullable = false, length = 50)
     private String createdBy = "admin";
@@ -33,28 +41,36 @@ public class Ambito {
     private String status = "A";
 
     // Getters y Setters
-    public Integer getCodAmbito() {
-        return codAmbito;
+    public Factura getFactura() {
+        return factura;
     }
 
-    public void setCodAmbito(Integer codAmbito) {
-        this.codAmbito = codAmbito;
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Integer getIdLineaDetalle() {
+        return idLineaDetalle;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdLineaDetalle(Integer idLineaDetalle) {
+        this.idLineaDetalle = idLineaDetalle;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Consumo getConsumo() {
+        return consumo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setConsumo(Consumo consumo) {
+        this.consumo = consumo;
+    }
+
+    public BigDecimal getMontoCobrado() {
+        return montoCobrado;
+    }
+
+    public void setMontoCobrado(BigDecimal montoCobrado) {
+        this.montoCobrado = montoCobrado;
     }
 
     public String getCreatedBy() {
