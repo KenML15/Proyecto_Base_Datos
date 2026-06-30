@@ -4,18 +4,19 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "AMBITO")
-public class Ambito {
+@Table(name = "PROMOCION_PLAN")
+@IdClass(PromocionPlanId.class)
+public class PromocionPlan {
 
     @Id
-    @Column(name = "CodAmbito")
-    private Integer codAmbito;
+    @ManyToOne
+    @JoinColumn(name = "CodPromocion", nullable = false)
+    private Promocion promocion;
 
-    @Column(name = "Nombre", nullable = false, length = 50)
-    private String nombre;
-
-    @Column(name = "Descripcion", length = 255)
-    private String descripcion;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "CodPlan", nullable = false)
+    private Plan plan;
 
     @Column(name = "CreatedBy", nullable = false, length = 50)
     private String createdBy = "admin";
@@ -33,28 +34,20 @@ public class Ambito {
     private String status = "A";
 
     // Getters y Setters
-    public Integer getCodAmbito() {
-        return codAmbito;
+    public Promocion getPromocion() {
+        return promocion;
     }
 
-    public void setCodAmbito(Integer codAmbito) {
-        this.codAmbito = codAmbito;
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Plan getPlan() {
+        return plan;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 
     public String getCreatedBy() {

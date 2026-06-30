@@ -50,7 +50,7 @@
 </th:block>
 
 <nav th:fragment="navbar" class="navbar navbar-expand-lg l360-navbar mb-4">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand l360-brand" href="/">
             <span class="l360-logo">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,26 +70,47 @@
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/customers"><i class="bi bi-people"></i> Clientes</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link l360-nav-link dropdown-toggle" href="#" id="navClientes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people"></i> Clientes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navClientes">
+                        <li><a class="dropdown-item" href="/customers"><i class="bi bi-person-fill"></i> Gestión de Clientes</a></li>
+                        <li><a class="dropdown-item" href="/lineas"><i class="bi bi-sim-fill"></i> Líneas Móviles</a></li>
+                        <li><a class="dropdown-item" href="/contratos"><i class="bi bi-file-earmark-text"></i> Contratos</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/lineas"><i class="bi bi-sim"></i> Líneas Móviles</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link l360-nav-link dropdown-toggle" href="#" id="navPlanes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-grid-3x3-gap"></i> Planes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navPlanes">
+                        <li><a class="dropdown-item" href="/categorias"><i class="bi bi-tags-fill"></i> Categorías</a></li>
+                        <li><a class="dropdown-item" href="/planes"><i class="bi bi-grid-3x3-gap"></i> Planes Tarifarios</a></li>
+                        <li><a class="dropdown-item" href="/promociones"><i class="bi bi-gift-fill"></i> Promociones</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/categorias"><i class="bi bi-tags"></i> Categorías</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link l360-nav-link dropdown-toggle" href="#" id="navFacturacion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-receipt"></i> Facturación
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navFacturacion">
+                        <li><a class="dropdown-item" href="/consumos"><i class="bi bi-graph-up"></i> Consumos</a></li>
+                        <li><a class="dropdown-item" href="/llamadas"><i class="bi bi-telephone-fill"></i> Llamadas</a></li>
+                        <li><a class="dropdown-item" href="/facturas"><i class="bi bi-receipt-fill"></i> Facturas</a></li>
+                        <li><a class="dropdown-item" href="/detalles-facturas"><i class="bi bi-list-check"></i> Detalles de Facturas</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/franjas"><i class="bi bi-clock-history"></i> Franjas Horarias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/planes"><i class="bi bi-grid-3x3-gap"></i> Planes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/contratos"><i class="bi bi-file-earmark-text"></i> Contratos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link l360-nav-link" href="/ambitos"><i class="bi bi-globe2"></i> Ámbitos</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link l360-nav-link dropdown-toggle" href="#" id="navConfiguracion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear"></i> Configuración
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navConfiguracion">
+                        <li><a class="dropdown-item" href="/ambitos"><i class="bi bi-globe2"></i> Ámbitos</a></li>
+                        <li><a class="dropdown-item" href="/franjas"><i class="bi bi-clock-history"></i> Franjas Horarias</a></li>
+                        <li><a class="dropdown-item" href="/promociones-ambitos"><i class="bi bi-link-45deg"></i> Promociones-Ámbitos</a></li>
+                        <li><a class="dropdown-item" href="/promociones-planes"><i class="bi bi-link-45deg"></i> Promociones-Planes</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item ms-lg-2 d-flex align-items-center">
                     <button type="button" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema claro/oscuro">

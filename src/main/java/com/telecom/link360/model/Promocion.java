@@ -1,21 +1,32 @@
 package com.telecom.link360.model;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "AMBITO")
-public class Ambito {
+@Table(name = "PROMOCION")
+public class Promocion {
 
     @Id
-    @Column(name = "CodAmbito")
-    private Integer codAmbito;
+    @Column(name = "CodPromocion")
+    private Integer codPromocion;
 
     @Column(name = "Nombre", nullable = false, length = 50)
     private String nombre;
 
     @Column(name = "Descripcion", length = 255)
     private String descripcion;
+
+    @Column(name = "PorcentajeDescuento", nullable = false, precision = 5, scale = 2)
+    private BigDecimal porcentajeDescuento;
+
+    @Column(name = "FechaInicio", nullable = false)
+    private LocalDate fechaInicio;
+
+    @Column(name = "FechaFin", nullable = false)
+    private LocalDate fechaFin;
 
     @Column(name = "CreatedBy", nullable = false, length = 50)
     private String createdBy = "admin";
@@ -33,12 +44,12 @@ public class Ambito {
     private String status = "A";
 
     // Getters y Setters
-    public Integer getCodAmbito() {
-        return codAmbito;
+    public Integer getCodPromocion() {
+        return codPromocion;
     }
 
-    public void setCodAmbito(Integer codAmbito) {
-        this.codAmbito = codAmbito;
+    public void setCodPromocion(Integer codPromocion) {
+        this.codPromocion = codPromocion;
     }
 
     public String getNombre() {
@@ -55,6 +66,30 @@ public class Ambito {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public BigDecimal getPorcentajeDescuento() {
+        return porcentajeDescuento;
+    }
+
+    public void setPorcentajeDescuento(BigDecimal porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public String getCreatedBy() {
