@@ -34,11 +34,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="plan : ${planes}">
-                    <td class="mono" th:text="${plan.id}"></td>
+                    <td class="mono" th:text="${plan.codPlan}"></td>
                     <td th:text="${plan.nombre}"></td>
                     <td th:text="${plan.descripcion}"></td>
                     <td class="mono" th:text="${'$' + #numbers.formatDecimal(plan.cuotaMensual, 1, 2)}"></td>
-                    <td><span class="chip chip-violet"><i class="bi bi-speedometer"></i> <span th:text="${plan.gigabytes + ' / ' + plan.minutos + ' / ' + plan.mensajes}"></span></span></td>
+                    <td><span class="chip chip-violet"><i class="bi bi-speedometer"></i> <span th:text="${plan.gigabytesIncluidos + ' / ' + plan.minutosIncluidos + ' / ' + plan.mensajesIncluidos}"></span></span></td>
                     <td class="mono" th:text="${'$' + #numbers.formatDecimal(plan.costoExceso, 1, 2)}"></td>
                     <td>
                         <span class="status-badge" th:classappend="${plan.status == 'A' ? 'status-active' : 'status-inactive'}">
@@ -48,8 +48,8 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a th:href="@{/planes/edit/{id}(id=${plan.id})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/planes/delete/{id}(id=${plan.id})}"
+                            <a th:href="@{/planes/edit/{id}(id=${plan.codPlan})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/planes/delete/{id}(id=${plan.codPlan})}"
                                class="btn btn-danger btn-sm"
                                onclick="return confirm('¿Está seguro de eliminar este plan?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
                         </div>

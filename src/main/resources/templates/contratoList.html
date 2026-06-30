@@ -35,7 +35,7 @@
                 <tbody>
                 <tr th:each="c : ${contratos}">
                     <td class="mono" th:text="${c.numContrato}"></td>
-                    <td th:text="${c.cliente.firstName + ' ' + c.cliente.lastName1}"></td>
+                    <td th:text="${c.cliente.nombre + ' ' + c.cliente.apellido1}"></td>
                     <td><span class="chip chip-cyan"><i class="bi bi-grid-3x3-gap"></i> <span th:text="${c.plan.nombre}"></span></span></td>
                     <td class="mono" th:text="${#temporals.format(c.fechaFirma, 'dd/MM/yyyy')}"></td>
                     <td th:text="${c.plazoMeses}"></td>

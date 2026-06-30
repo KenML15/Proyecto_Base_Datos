@@ -14,7 +14,6 @@ public class DetalleFactura {
     private Integer numFactura;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_LineaDetalle")
     private Integer idLineaDetalle;
 

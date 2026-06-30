@@ -2,7 +2,7 @@ package com.telecom.link360.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +23,7 @@ public class Contrato {
     private Plan plan;
 
     @Column(name = "FechaFirma", nullable = false)
-    private Date fechaFirma;
+    private LocalDate fechaFirma;
 
     @Column(name = "PlazoMeses", nullable = false)
     private Integer plazoMeses;
@@ -58,8 +58,8 @@ public class Contrato {
     public Plan getPlan() { return plan; }
     public void setPlan(Plan plan) { this.plan = plan; }
 
-    public Date getFechaFirma() { return fechaFirma; }
-    public void setFechaFirma(Date fechaFirma) { this.fechaFirma = fechaFirma; }
+    public LocalDate getFechaFirma() { return fechaFirma; }
+    public void setFechaFirma(LocalDate fechaFirma) { this.fechaFirma = fechaFirma; }
 
     public Integer getPlazoMeses() { return plazoMeses; }
     public void setPlazoMeses(Integer plazoMeses) { this.plazoMeses = plazoMeses; }

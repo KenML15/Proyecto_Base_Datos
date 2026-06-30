@@ -2,7 +2,7 @@ package com.telecom.link360.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,10 +19,10 @@ public class Factura {
     private Customer cliente;
 
     @Column(name = "FechaEmision", nullable = false)
-    private Date fechaEmision;
+    private LocalDate fechaEmision;
 
     @Column(name = "FechaFin", nullable = false)
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "Desc_epoca", nullable = false, precision = 10, scale = 2)
     private BigDecimal descEpoca;
@@ -76,11 +76,11 @@ public class Factura {
     public Customer getCliente() { return cliente; }
     public void setCliente(Customer cliente) { this.cliente = cliente; }
 
-    public Date getFechaEmision() { return fechaEmision; }
-    public void setFechaEmision(Date fechaEmision) { this.fechaEmision = fechaEmision; }
+    public LocalDate getFechaEmision() { return fechaEmision; }
+    public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
 
-    public Date getFechaFin() { return fechaFin; }
-    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
+    public LocalDate getFechaFin() { return fechaFin; }
+    public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
 
     public BigDecimal getDescEpoca() { return descEpoca; }
     public void setDescEpoca(BigDecimal descEpoca) { this.descEpoca = descEpoca; }

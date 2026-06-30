@@ -1,75 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Líneas Móviles · Link360</title>
+    <title>Formulario de Línea Móvil · Link360</title>
     <th:block th:replace="~{fragments :: headAssets}"></th:block>
 </head>
 <body>
 
 <div th:replace="~{fragments :: navbar}"></div>
 
-<div class="container l360-page">
+<div class="container l360-page l360-page-narrow">
     <div class="page-header">
         <div>
-            <h2><span class="page-header-icon"><i class="bi bi-phone-fill"></i></span> Gestión de Líneas Móviles</h2>
-            <p class="page-subtitle">Visualiza y administra todas las líneas telefónicas registradas.</p>
+            <h2><span class="page-header-icon"><i class="bi bi-phone-fill"></i></span> Datos de Línea Móvil</h2>
+            <p class="page-subtitle">Registra una nueva línea móvil para un cliente.</p>
         </div>
-        <a href="/lineas/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Nueva Línea</a>
     </div>
 
-    <div class="l360-card table-card">
-        <div class="table-responsive">
-            <table class="table table-hover l360-table">
-                <thead>
-                <tr>
-                    <th>Teléfono</th>
-                    <th>Cliente</th>
-                    <th>Tipo de Línea</th>
-                    <th>Tecnología</th>
-                    <th>Fecha Activación</th>
-                    <th>Estado</th>
-                    <th>Tipo SIM</th>
-                    <th>Estado Registro</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="l : ${lineas}">
-                    <td class="mono" th:text="${l.numTelefono}"></td>
-                    <td th:text="${l.cliente.nombre + ' ' + l.cliente.apellido1}"></td>
-                    <td><span class="chip chip-blue" th:text="${l.tipoLinea}"></span></td>
-                    <td th:text="${l.tecnologia}"></td>
-                    <!-- ✅ CORREGIDO: Usar conversión para java.sql.Date -->
-                    <td class="mono" th:text="${#dates.format(l.fechaActivacion, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${l.estadoLinea}"></td>
-                    <td th:text="${l.tipoSIM}"></td>
-                    <td>
-                        <span class="status-badge" th:classappend="${l.status == 'A' ? 'status-active' : 'status-inactive'}">
-                            <i class="bi bi-circle-fill"></i>
-                            <span th:text="${l.status == 'A' ? 'Activo' : 'Inactivo'}"></span>
-                        </span>
-                    </td>
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a th:href="@{/lineas/edit/{id}(id=${l.numTelefono})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/lineas/delete/{id}(id=${l.numTelefono})}"
-                               class="btn btn-danger btn-sm"
-                               onclick="return confirm('¿Está seguro de eliminar esta línea?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr th:if="${lineas.empty}">
-                    <td colspan="9">
-                        <div class="empty-state">
-                            <i class="bi bi-inbox"></i>
-                            No hay líneas móviles registradas actualmente.
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+    <form th:action="@{/lineas/save}" th:object="${lineaMovil}" method="post" class="l360-card form-card">
+
+        <div class="mb-3" th:if="${lineaMovil.numTelefono != null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Número de Teléfono</label>
+            <input type="text" th:value="${lineaMovil.numTelefono}" class="form-control" readonly disabled />
+            <input type="hidden" th:field="*{numTelefono}" />
         </div>
-    </div>
+
+        <div class="mb-3" th:if="${lineaMovil.numTelefono == null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Número de Teléfono *</label>
+            <input type="text" th:field="*{numTelefono}" class="form-control" maxlength="15" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Cliente *</label>
+            <select th:field="*{cliente}" class="form-control" required>
+                <option value="" disabled selected>Seleccione un cliente...</option>
+                <option th:each="c : ${clientes}"
+                        th:value="${c.idCliente}"
+                        th:text="${c.nombre + ' ' + c.apellido1 + ' (ID: ' + c.idCliente + ')'}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-tag"></i> Tipo de Línea *</label>
+            <input type="text" th:field="*{tipoLinea}" class="form-control" placeholder="Ej: Prepago, Pospago" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-broadcast"></i> Tecnología *</label>
+            <input type="text" th:field="*{tecnologia}" class="form-control" placeholder="Ej: 4G, 5G" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Activación</label>
+            <input type="date" th:field="*{fechaActivacion}" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado de Línea *</label>
+            <input type="text" th:field="*{estadoLinea}" class="form-control" placeholder="Ej: Activa, Suspendida" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-sim"></i> Tipo de SIM *</label>
+            <input type="text" th:field="*{tipoSIM}" class="form-control" placeholder="Ej: Física, eSIM" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
+            <select th:field="*{status}" class="form-control" required>
+                <option value="A">Activo</option>
+                <option value="I">Inactivo</option>
+            </select>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Línea Móvil</button>
+            <a href="/lineas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
+        </div>
+    </form>
 </div>
 
 <div th:replace="~{fragments :: footer}"></div>

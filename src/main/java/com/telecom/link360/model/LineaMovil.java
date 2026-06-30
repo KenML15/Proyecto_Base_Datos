@@ -1,7 +1,7 @@
 package com.telecom.link360.model;
 
 import jakarta.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +23,7 @@ public class LineaMovil {
     private String tecnologia;
 
     @Column(name = "FechaActivacion", nullable = false)
-    private Date fechaActivacion;
+    private LocalDate fechaActivacion;
 
     @Column(name = "EstadoLinea", nullable = false, length = 20)
     private String estadoLinea;
@@ -61,8 +61,8 @@ public class LineaMovil {
     public String getTecnologia() { return tecnologia; }
     public void setTecnologia(String tecnologia) { this.tecnologia = tecnologia; }
 
-    public Date getFechaActivacion() { return fechaActivacion; }
-    public void setFechaActivacion(Date fechaActivacion) { this.fechaActivacion = fechaActivacion; }
+    public LocalDate getFechaActivacion() { return fechaActivacion; }
+    public void setFechaActivacion(LocalDate fechaActivacion) { this.fechaActivacion = fechaActivacion; }
 
     public String getEstadoLinea() { return estadoLinea; }
     public void setEstadoLinea(String estadoLinea) { this.estadoLinea = estadoLinea; }

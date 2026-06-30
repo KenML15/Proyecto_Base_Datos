@@ -29,12 +29,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="a : ${ambitos}">
-                    <td class="mono" th:text="${a.code}"></td>
-                    <td th:text="${a.name}"></td>
+                    <td class="mono" th:text="${a.codAmbito}"></td>
+                    <td th:text="${a.nombre}"></td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a th:href="@{/ambitos/edit/{code}(code=${a.code})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/ambitos/delete/{code}(code=${a.code})}"
+                            <a th:href="@{/ambitos/edit/{id}(id=${a.codAmbito})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/ambitos/delete/{id}(id=${a.codAmbito})}"
                                class="btn btn-danger btn-sm"
                                onclick="return confirm('¿Está seguro de eliminar este ámbito?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
                         </div>

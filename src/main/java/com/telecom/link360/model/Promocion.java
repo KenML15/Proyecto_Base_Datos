@@ -2,7 +2,7 @@ package com.telecom.link360.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,10 +24,10 @@ public class Promocion {
     private BigDecimal porcentajeDescuento;
 
     @Column(name = "FechaInicio", nullable = false)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "FechaFin", nullable = false)
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "CreatedBy", nullable = false, length = 50)
     private String createdBy = "admin";
@@ -59,11 +59,11 @@ public class Promocion {
     public BigDecimal getPorcentajeDescuento() { return porcentajeDescuento; }
     public void setPorcentajeDescuento(BigDecimal porcentajeDescuento) { this.porcentajeDescuento = porcentajeDescuento; }
 
-    public Date getFechaInicio() { return fechaInicio; }
-    public void setFechaInicio(Date fechaInicio) { this.fechaInicio = fechaInicio; }
+    public LocalDate getFechaInicio() { return fechaInicio; }
+    public void setFechaInicio(LocalDate fechaInicio) { this.fechaInicio = fechaInicio; }
 
-    public Date getFechaFin() { return fechaFin; }
-    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
+    public LocalDate getFechaFin() { return fechaFin; }
+    public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
 
     public String getCreatedBy() { return createdBy; }
     public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }

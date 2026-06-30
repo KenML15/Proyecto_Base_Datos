@@ -39,8 +39,7 @@
                     <td th:text="${l.cliente.nombre + ' ' + l.cliente.apellido1}"></td>
                     <td><span class="chip chip-blue" th:text="${l.tipoLinea}"></span></td>
                     <td th:text="${l.tecnologia}"></td>
-                    <!-- ✅ CORREGIDO: Cambiar de #temporals a #dates para java.sql.Date -->
-                    <td class="mono" th:text="${#dates.format(l.fechaActivacion, 'dd/MM/yyyy')}"></td>
+                    <td class="mono" th:text="${#temporals.format(l.fechaActivacion, 'dd/MM/yyyy')}"></td>
                     <td th:text="${l.estadoLinea}"></td>
                     <td th:text="${l.tipoSIM}"></td>
                     <td>

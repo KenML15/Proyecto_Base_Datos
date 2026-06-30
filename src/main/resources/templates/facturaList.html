@@ -33,7 +33,7 @@
                 <tbody>
                 <tr th:each="f : ${facturas}">
                     <td class="mono" th:text="${f.numFactura}"></td>
-                    <td th:text="${f.cliente.firstName + ' ' + f.cliente.lastName1}"></td>
+                    <td th:text="${f.cliente.nombre + ' ' + f.cliente.apellido1}"></td>
                     <td class="mono" th:text="${#temporals.format(f.fechaEmision, 'dd/MM/yyyy')}"></td>
                     <td class="mono" th:text="${'$' + #numbers.formatDecimal(f.montoTotal, 1, 2)}"></td>
                     <td>

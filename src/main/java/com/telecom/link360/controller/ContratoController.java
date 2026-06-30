@@ -45,7 +45,7 @@ public class ContratoController {
     @PostMapping("/save")
     public String saveContrato(@ModelAttribute Contrato contrato) {
         if (contrato.getFechaFirma() == null) {
-            contrato.setFechaFirma(new java.sql.Date(System.currentTimeMillis()));
+            contrato.setFechaFirma(LocalDate.now());
         }
 
         if (contrato.getCreatedBy() == null || contrato.getCreatedBy().isEmpty()) {

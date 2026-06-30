@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -53,7 +52,7 @@ public class LineaMovilController {
 
         // 2. Asignar fecha de activación si no existe
         if (lineaMovil.getFechaActivacion() == null) {
-            lineaMovil.setFechaActivacion(Date.valueOf(LocalDate.now()));
+            lineaMovil.setFechaActivacion(LocalDate.now());
         }
 
         // 3. Auditoría - CreatedBy y CreatedAt (solo para nuevos)

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -47,7 +46,7 @@ public class CustomerController {
         }
 
         if (customer.getFechaIngreso() == null) {
-            customer.setFechaIngreso(Date.valueOf(LocalDate.now()));
+            customer.setFechaIngreso(LocalDate.now());
         }
 
         if (customer.getCreatedBy() == null || customer.getCreatedBy().isEmpty()) {

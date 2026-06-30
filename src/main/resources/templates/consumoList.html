@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Consumos · Link360</title>
-  <th:block th:replace="~{fragments :: headAssets}"></th:block>
+    <title>Consumos · Link360</title>
+    <th:block th:replace="~{fragments :: headAssets}"></th:block>
 </head>
 <body>
 
 <div th:replace="~{fragments :: navbar}"></div>
 
 <div class="container l360-page">
-  <div class="page-header">
-    <div>
-      <h2><span class="page-header-icon"><i class="bi bi-graph-up"></i></span> Gestión de Consumos</h2>
-      <p class="page-subtitle">Registra y visualiza el consumo de líneas por ámbito y franja horaria.</p>
+    <div class="page-header">
+        <div>
+            <h2><span class="page-header-icon"><i class="bi bi-graph-up"></i></span> Gestión de Consumos</h2>
+            <p class="page-subtitle">Registra y visualiza el consumo de líneas por ámbito y franja horaria.</p>
+        </div>
+        <a href="/consumos/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Nuevo Consumo</a>
     </div>
-    <a href="/consumos/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Nuevo Consumo</a>
-  </div>
 
-  <div class="l360-card table-card">
-    <div class="table-responsive">
-      <table class="table table-hover l360-table">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Teléfono</th>
-          <th>Ámbito</th>
-          <th>Tipo</th>
-          <th>Cantidad</th>
-          <th>Costo</th>
-          <th>Fecha Inicio</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="c : ${consumos}">
-          <td class="mono" th:text="${c.idConsumo}"></td>
-          <td class="mono" th:text="${c.lineaMovil.numeroTelefono}"></td>
-          <td><span class="chip chip-blue"><i class="bi bi-globe"></i> <span th:text="${c.ambito.nombre}"></span></span></td>
-          <td th:text="${c.tipoConsumo}"></td>
-          <td class="mono" th:text="${#numbers.formatDecimal(c.cantidadConsumida, 1, 2)}"></td>
-          <td class="mono" th:text="${'$' + #numbers.formatDecimal(c.costo, 1, 2)}"></td>
-          <td class="mono" th:text="${#temporals.format(c.fechaHoraInicio, 'dd/MM/yyyy HH:mm')}"></td>
-          <td>
+    <div class="l360-card table-card">
+        <div class="table-responsive">
+            <table class="table table-hover l360-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Teléfono</th>
+                    <th>Ámbito</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Costo</th>
+                    <th>Fecha Inicio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${consumos}">
+                    <td class="mono" th:text="${c.idConsumo}"></td>
+                    <td class="mono" th:text="${c.lineaMovil.numTelefono}"></td>
+                    <td><span class="chip chip-blue"><i class="bi bi-globe"></i> <span th:text="${c.ambito.nombre}"></span></span></td>
+                    <td th:text="${c.tipoConsumo}"></td>
+                    <td class="mono" th:text="${#numbers.formatDecimal(c.cantidadConsumida, 1, 2)}"></td>
+                    <td class="mono" th:text="${'$' + #numbers.formatDecimal(c.costo, 1, 2)}"></td>
+                    <td class="mono" th:text="${#temporals.format(c.fechaHoraInicio, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
                         <span class="status-badge" th:classappend="${c.status == 'A' ? 'status-active' : 'status-inactive'}">
                             <i class="bi bi-circle-fill"></i>
                             <span th:text="${c.status == 'A' ? 'Activo' : 'Inactivo'}"></span>
                         </span>
-          </td>
-          <td>
-            <div class="btn-group" role="group">
-              <a th:href="@{/consumos/edit/{id}(id=${c.idConsumo})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-              <a th:href="@{/consumos/delete/{id}(id=${c.idConsumo})}"
-                 class="btn btn-danger btn-sm"
-                 onclick="return confirm('¿Está seguro de eliminar este consumo?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
-            </div>
-          </td>
-        </tr>
-        <tr th:if="${consumos.empty}">
-          <td colspan="9">
-            <div class="empty-state">
-              <i class="bi bi-inbox"></i>
-              No hay consumos registrados actualmente.
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a th:href="@{/consumos/edit/{id}(id=${c.idConsumo})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/consumos/delete/{id}(id=${c.idConsumo})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Está seguro de eliminar este consumo?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${consumos.empty}">
+                    <td colspan="9">
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            No hay consumos registrados actualmente.
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
 
 <div th:replace="~{fragments :: footer}"></div>
