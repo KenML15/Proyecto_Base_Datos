@@ -11,65 +11,70 @@
 <div class="container l360-page l360-page-narrow">
     <div class="page-header">
         <div>
-            <h2><span class="page-header-icon"><i class="bi bi-sim-fill"></i></span> Nueva Línea Móvil</h2>
-            <p class="page-subtitle">Asigna una línea a un cliente y configura sus datos técnicos.</p>
+            <h2><span class="page-header-icon"><i class="bi bi-phone-fill"></i></span> Datos de Línea Móvil</h2>
+            <p class="page-subtitle">Registra una nueva línea móvil para un cliente.</p>
         </div>
     </div>
 
-    <form th:action="@{/lineas/save}" th:object="${linea}" method="post" class="l360-card form-card">
+    <form th:action="@{/lineas/save}" th:object="${lineaMovil}" method="post" class="l360-card form-card">
 
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-telephone"></i> Número de Teléfono</label>
-            <input type="text" th:field="*{numeroTelefono}" class="form-control" required placeholder="Ej: 8888-8888"/>
+        <div class="mb-3" th:if="${lineaMovil.numTelefono != null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Número de Teléfono</label>
+            <input type="text" th:value="${lineaMovil.numTelefono}" class="form-control" readonly disabled />
+            <input type="hidden" th:field="*{numTelefono}" />
+        </div>
+
+        <div class="mb-3" th:if="${lineaMovil.numTelefono == null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Número de Teléfono *</label>
+            <input type="text" th:field="*{numTelefono}" class="form-control" maxlength="15" required/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-person"></i> Cliente Asignado</label>
-            <select th:field="*{customer.id}" class="form-control" required>
+            <label class="form-label"><i class="bi bi-person"></i> Cliente *</label>
+            <select th:field="*{cliente}" class="form-control" required>
                 <option value="" disabled selected>Seleccione un cliente...</option>
-                <option th:each="c : ${customers}"
-                        th:value="${c.id}"
-                        th:text="${c.firstName + ' ' + c.lastName1}">
+                <option th:each="c : ${clientes}"
+                        th:value="${c.idCliente}"
+                        th:text="${c.nombre + ' ' + c.apellido1 + ' (ID: ' + c.idCliente + ')'}">
                 </option>
             </select>
         </div>
 
         <div class="mb-3">
+            <label class="form-label"><i class="bi bi-tag"></i> Tipo de Línea *</label>
+            <input type="text" th:field="*{tipoLinea}" class="form-control" placeholder="Ej: Prepago, Pospago" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-broadcast"></i> Tecnología *</label>
+            <input type="text" th:field="*{tecnologia}" class="form-control" placeholder="Ej: 4G, 5G" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Activación</label>
+            <input type="date" th:field="*{fechaActivacion}" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado de Línea *</label>
+            <input type="text" th:field="*{estadoLinea}" class="form-control" placeholder="Ej: Activa, Suspendida" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-sim"></i> Tipo de SIM *</label>
+            <input type="text" th:field="*{tipoSIM}" class="form-control" placeholder="Ej: Física, eSIM" required/>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
-            <select th:field="*{estado}" class="form-control" required>
+            <select th:field="*{status}" class="form-control" required>
                 <option value="A">Activo</option>
                 <option value="I">Inactivo</option>
             </select>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-credit-card-2-front"></i> Tipo de Línea</label>
-            <select th:field="*{tipoLinea}" class="form-control" required>
-                <option value="Prepago">Prepago</option>
-                <option value="Postpago">Postpago</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Activación</label>
-            <input type="date" th:field="*{fechaActivacion}" class="form-control" required/>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-sim"></i> Tipo de SIM</label>
-            <select th:field="*{tipoSIM}" class="form-control" required>
-                <option value="Fisica">Física</option>
-                <option value="eSIM">eSIM</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-broadcast"></i> Tecnología</label>
-            <input type="text" th:field="*{tecnologia}" class="form-control" required placeholder="Ej: 5G"/>
-        </div>
-
         <div class="d-grid gap-2 mt-4">
-            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Línea</button>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Línea Móvil</button>
             <a href="/lineas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
         </div>
     </form>

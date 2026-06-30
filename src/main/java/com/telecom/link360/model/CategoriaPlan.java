@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class CategoriaPlan {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CodCategoria")
     private Integer codCategoria;
 
@@ -32,68 +33,30 @@ public class CategoriaPlan {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public CategoriaPlan() {}
+
     // Getters y Setters
-    public Integer getCodCategoria() {
-        return codCategoria;
-    }
+    public Integer getCodCategoria() { return codCategoria; }
+    public void setCodCategoria(Integer codCategoria) { this.codCategoria = codCategoria; }
 
-    public void setCodCategoria(Integer codCategoria) {
-        this.codCategoria = codCategoria;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getVelocidadMaxima() { return velocidadMaxima; }
+    public void setVelocidadMaxima(String velocidadMaxima) { this.velocidadMaxima = velocidadMaxima; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public String getVelocidadMaxima() {
-        return velocidadMaxima;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setVelocidadMaxima(String velocidadMaxima) {
-        this.velocidadMaxima = velocidadMaxima;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

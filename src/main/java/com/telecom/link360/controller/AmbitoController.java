@@ -33,16 +33,6 @@ public class AmbitoController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveAmbito(@ModelAttribute Ambito ambito) {
-        // Generar ID manual si es nuevo
-        if (ambito.getCodAmbito() == null) {
-            Integer maxId = ambitoRepository.findAll()
-                    .stream()
-                    .map(Ambito::getCodAmbito)
-                    .max(Integer::compare)
-                    .orElse(0);
-            ambito.setCodAmbito(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (ambito.getCreatedBy() == null || ambito.getCreatedBy().isEmpty()) {
             ambito.setCreatedBy("admin");

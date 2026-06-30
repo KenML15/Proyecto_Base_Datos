@@ -1,23 +1,20 @@
 package com.telecom.link360.model;
 
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LINEA_MOVIL")
 public class LineaMovil {
 
-    @Id // Esta es la anotación correcta de jakarta.persistence
-    @Column(name = "NumTelefono")
-    private String numeroTelefono;
+    @Id
+    @Column(name = "NumTelefono", length = 15)
+    private String numTelefono;
 
-    @Column(name = "EstadoLinea", nullable = false, length = 20)
-    private String estado;
-
-    @Column(name = "Status", nullable = false, length = 1)
-    private String status = "A";
+    @ManyToOne
+    @JoinColumn(name = "Id_Cliente", nullable = false)
+    private Customer cliente;
 
     @Column(name = "TipoLinea", nullable = false, length = 20)
     private String tipoLinea;
@@ -28,85 +25,63 @@ public class LineaMovil {
     @Column(name = "FechaActivacion", nullable = false)
     private LocalDate fechaActivacion;
 
+    @Column(name = "EstadoLinea", nullable = false, length = 20)
+    private String estadoLinea;
+
     @Column(name = "TipoSIM", nullable = false, length = 10)
     private String tipoSIM;
 
     @Column(name = "CreatedBy", nullable = false, length = 50)
     private String createdBy = "admin";
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
+    @Column(name = "CreatedAt", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+    @Column(name = "ModifiedBy", length = 50)
+    private String modifiedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "Id_Cliente", nullable = false)
-    private Customer customer;
+    @Column(name = "ModifiedAt")
+    private LocalDateTime modifiedAt;
 
-    public String getNumeroTelefono() {
-        return numeroTelefono;
-    }
+    @Column(name = "Status", nullable = false, length = 1)
+    private String status = "A";
 
-    public void setNumeroTelefono(String numeroTelefono) {
-        this.numeroTelefono = numeroTelefono;
-    }
+    public LineaMovil() {}
 
-    public String getEstado() {
-        return estado;
-    }
+    // Getters y Setters
+    public String getNumTelefono() { return numTelefono; }
+    public void setNumTelefono(String numTelefono) { this.numTelefono = numTelefono; }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    public Customer getCliente() { return cliente; }
+    public void setCliente(Customer cliente) { this.cliente = cliente; }
 
-    public String getStatus() {
-        return status;
-    }
+    public String getTipoLinea() { return tipoLinea; }
+    public void setTipoLinea(String tipoLinea) { this.tipoLinea = tipoLinea; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getTecnologia() { return tecnologia; }
+    public void setTecnologia(String tecnologia) { this.tecnologia = tecnologia; }
 
-    public String getTipoLinea() {
-        return tipoLinea;
-    }
+    public LocalDate getFechaActivacion() { return fechaActivacion; }
+    public void setFechaActivacion(LocalDate fechaActivacion) { this.fechaActivacion = fechaActivacion; }
 
-    public void setTipoLinea(String tipoLinea) {
-        this.tipoLinea = tipoLinea;
-    }
+    public String getEstadoLinea() { return estadoLinea; }
+    public void setEstadoLinea(String estadoLinea) { this.estadoLinea = estadoLinea; }
 
-    public String getTecnologia() {
-        return tecnologia;
-    }
+    public String getTipoSIM() { return tipoSIM; }
+    public void setTipoSIM(String tipoSIM) { this.tipoSIM = tipoSIM; }
 
-    public void setTecnologia(String tecnologia) {
-        this.tecnologia = tecnologia;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public String getTipoSIM() {
-        return tipoSIM;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setTipoSIM(String tipoSIM) {
-        this.tipoSIM = tipoSIM;
-    }
-
-    public LocalDate getFechaActivacion() {
-        return fechaActivacion;
-    }
-
-    public void setFechaActivacion(LocalDate fechaActivacion) {
-        this.fechaActivacion = fechaActivacion;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

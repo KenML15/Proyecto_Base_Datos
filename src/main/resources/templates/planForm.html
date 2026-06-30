@@ -17,11 +17,19 @@
     </div>
 
     <form th:action="@{/planes/save}" th:object="${plan}" method="post" class="l360-card form-card">
-        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{codPlan}"/>
 
-        <div class="mb-3" th:if="${plan.id != null}">
+        <!-- MOSTRAR ID EN EDICIÓN -->
+        <div class="mb-3" th:if="${plan.codPlan != null}">
             <label class="form-label"><i class="bi bi-fingerprint"></i> ID del Plan</label>
-            <input type="text" th:value="${plan.id}" class="form-control" readonly disabled />
+            <input type="text" th:value="${plan.codPlan}" class="form-control" readonly disabled />
+        </div>
+
+        <!-- MOSTRAR ALERTA EN NUEVO REGISTRO -->
+        <div class="mb-3" th:if="${plan.codPlan == null}">
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle"></i> El ID del plan se asignará automáticamente al guardar.
+            </div>
         </div>
 
         <div class="mb-3">
@@ -42,15 +50,15 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label class="form-label"><i class="bi bi-hdd-network"></i> Gigabytes Incluidos *</label>
-                <input type="number" th:field="*{gigabytes}" class="form-control" required/>
+                <input type="number" th:field="*{gigabytesIncluidos}" class="form-control" required/>
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label"><i class="bi bi-telephone-outbound"></i> Minutos Incluidos *</label>
-                <input type="number" th:field="*{minutos}" class="form-control" required/>
+                <input type="number" th:field="*{minutosIncluidos}" class="form-control" required/>
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label"><i class="bi bi-chat-dots"></i> Mensajes Incluidos *</label>
-                <input type="number" th:field="*{mensajes}" class="form-control" required/>
+                <input type="number" th:field="*{mensajesIncluidos}" class="form-control" required/>
             </div>
         </div>
 
@@ -61,8 +69,10 @@
 
         <div class="mb-3">
             <label class="form-label"><i class="bi bi-tags"></i> Categoría Plan *</label>
-            <input type="number" th:field="*{codCategoria}" class="form-control" required/>
-            <small class="form-text">ID de la categoría (ej: 1 para categoría básica)</small>
+            <select th:field="*{codCategoria}" class="form-control" required>
+                <option value="">-- Seleccione una categoría --</option>
+                <option th:each="cat : ${categorias}" th:value="${cat.codCategoria}" th:text="${cat.descripcion}"></option>
+            </select>
         </div>
 
         <div class="mb-3">

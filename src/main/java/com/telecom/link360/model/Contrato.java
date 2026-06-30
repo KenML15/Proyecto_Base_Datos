@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Contrato {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NumContrato")
     private Integer numContrato;
 
@@ -45,92 +46,39 @@ public class Contrato {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public Contrato() {}
+
     // Getters y Setters
-    public Integer getNumContrato() {
-        return numContrato;
-    }
+    public Integer getNumContrato() { return numContrato; }
+    public void setNumContrato(Integer numContrato) { this.numContrato = numContrato; }
 
-    public void setNumContrato(Integer numContrato) {
-        this.numContrato = numContrato;
-    }
+    public Customer getCliente() { return cliente; }
+    public void setCliente(Customer cliente) { this.cliente = cliente; }
 
-    public Customer getCliente() {
-        return cliente;
-    }
+    public Plan getPlan() { return plan; }
+    public void setPlan(Plan plan) { this.plan = plan; }
 
-    public void setCliente(Customer cliente) {
-        this.cliente = cliente;
-    }
+    public LocalDate getFechaFirma() { return fechaFirma; }
+    public void setFechaFirma(LocalDate fechaFirma) { this.fechaFirma = fechaFirma; }
 
-    public Plan getPlan() {
-        return plan;
-    }
+    public Integer getPlazoMeses() { return plazoMeses; }
+    public void setPlazoMeses(Integer plazoMeses) { this.plazoMeses = plazoMeses; }
 
-    public void setPlan(Plan plan) {
-        this.plan = plan;
-    }
+    public BigDecimal getMontoPenalizacion() { return montoPenalizacion; }
+    public void setMontoPenalizacion(BigDecimal montoPenalizacion) { this.montoPenalizacion = montoPenalizacion; }
 
-    public LocalDate getFechaFirma() {
-        return fechaFirma;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public void setFechaFirma(LocalDate fechaFirma) {
-        this.fechaFirma = fechaFirma;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public Integer getPlazoMeses() {
-        return plazoMeses;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public void setPlazoMeses(Integer plazoMeses) {
-        this.plazoMeses = plazoMeses;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public BigDecimal getMontoPenalizacion() {
-        return montoPenalizacion;
-    }
-
-    public void setMontoPenalizacion(BigDecimal montoPenalizacion) {
-        this.montoPenalizacion = montoPenalizacion;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

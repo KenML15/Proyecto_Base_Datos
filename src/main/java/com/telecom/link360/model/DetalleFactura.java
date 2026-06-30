@@ -10,13 +10,16 @@ import java.time.LocalDateTime;
 public class DetalleFactura {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "NumFactura", nullable = false)
-    private Factura factura;
+    @Column(name = "NumFactura")
+    private Integer numFactura;
 
     @Id
     @Column(name = "Id_LineaDetalle")
     private Integer idLineaDetalle;
+
+    @ManyToOne
+    @JoinColumn(name = "NumFactura", insertable = false, updatable = false)
+    private Factura factura;
 
     @ManyToOne
     @JoinColumn(name = "Id_Consumo", nullable = false)
@@ -40,76 +43,41 @@ public class DetalleFactura {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
-    // Getters y Setters
-    public Factura getFactura() {
-        return factura;
-    }
+    public DetalleFactura() {}
 
+    // Getters y Setters
+    public Integer getNumFactura() { return numFactura; }
+    public void setNumFactura(Integer numFactura) { this.numFactura = numFactura; }
+
+    public Integer getIdLineaDetalle() { return idLineaDetalle; }
+    public void setIdLineaDetalle(Integer idLineaDetalle) { this.idLineaDetalle = idLineaDetalle; }
+
+    public Factura getFactura() { return factura; }
     public void setFactura(Factura factura) {
         this.factura = factura;
+        if (factura != null) {
+            this.numFactura = factura.getNumFactura();
+        }
     }
 
-    public Integer getIdLineaDetalle() {
-        return idLineaDetalle;
-    }
+    public Consumo getConsumo() { return consumo; }
+    public void setConsumo(Consumo consumo) { this.consumo = consumo; }
 
-    public void setIdLineaDetalle(Integer idLineaDetalle) {
-        this.idLineaDetalle = idLineaDetalle;
-    }
+    public BigDecimal getMontoCobrado() { return montoCobrado; }
+    public void setMontoCobrado(BigDecimal montoCobrado) { this.montoCobrado = montoCobrado; }
 
-    public Consumo getConsumo() {
-        return consumo;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public void setConsumo(Consumo consumo) {
-        this.consumo = consumo;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public BigDecimal getMontoCobrado() {
-        return montoCobrado;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public void setMontoCobrado(BigDecimal montoCobrado) {
-        this.montoCobrado = montoCobrado;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

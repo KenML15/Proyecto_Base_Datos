@@ -1,14 +1,15 @@
 package com.telecom.link360.model;
 
 import jakarta.persistence.*;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "FRANJA_HORARIA")
 public class FranjaHoraria {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Franja")
     private Integer idFranja;
 
@@ -39,84 +40,36 @@ public class FranjaHoraria {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public FranjaHoraria() {}
+
     // Getters y Setters
-    public Integer getIdFranja() {
-        return idFranja;
-    }
+    public Integer getIdFranja() { return idFranja; }
+    public void setIdFranja(Integer idFranja) { this.idFranja = idFranja; }
 
-    public void setIdFranja(Integer idFranja) {
-        this.idFranja = idFranja;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public LocalTime getHoraInicio() { return horaInicio; }
+    public void setHoraInicio(LocalTime horaInicio) { this.horaInicio = horaInicio; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public LocalTime getHoraFin() { return horaFin; }
+    public void setHoraFin(LocalTime horaFin) { this.horaFin = horaFin; }
 
-    public LocalTime getHoraInicio() {
-        return horaInicio;
-    }
+    public String getDiasAplicacion() { return diasAplicacion; }
+    public void setDiasAplicacion(String diasAplicacion) { this.diasAplicacion = diasAplicacion; }
 
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public LocalTime getHoraFin() {
-        return horaFin;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public String getDiasAplicacion() {
-        return diasAplicacion;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setDiasAplicacion(String diasAplicacion) {
-        this.diasAplicacion = diasAplicacion;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

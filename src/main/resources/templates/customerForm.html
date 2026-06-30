@@ -18,51 +18,55 @@
 
     <form th:action="@{/customers/save}" th:object="${customer}" method="post" class="l360-card form-card">
 
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{idCliente}" />
 
-        <div class="mb-3" th:if="${customer.id != null}">
+        <!-- MOSTRAR ID SOLO SI ES EDICIÓN (cuando ya existe) -->
+        <div class="mb-3" th:if="${customer.idCliente != null}">
             <label class="form-label"><i class="bi bi-fingerprint"></i> ID de Sistema</label>
-            <input type="text" th:value="${customer.id}" class="form-control" readonly disabled />
+            <input type="text" th:value="${customer.idCliente}" class="form-control" readonly disabled />
         </div>
 
-        <div class="mb-3" th:if="${customer.id == null}">
-            <label class="form-label"><i class="bi bi-fingerprint"></i> ID Cliente (Numérico)</label>
-            <input type="number" th:field="*{id}" class="form-control" required/>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"><i class="bi bi-person"></i> Nombre</label>
-            <input type="text" th:field="*{firstName}" class="form-control" required/>
+        <!-- MOSTRAR MENSAJE SI ES NUEVO REGISTRO -->
+        <div class="mb-3" th:if="${customer.idCliente == null}">
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle"></i> El ID se asignará automáticamente al guardar.
+            </div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-person"></i> Primer Apellido</label>
-            <input type="text" th:field="*{lastName1}" class="form-control" required/>
+            <label class="form-label"><i class="bi bi-person"></i> Nombre *</label>
+            <input type="text" th:field="*{nombre}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Primer Apellido *</label>
+            <input type="text" th:field="*{apellido1}" class="form-control" required/>
         </div>
 
         <div class="mb-3">
             <label class="form-label"><i class="bi bi-person"></i> Segundo Apellido</label>
-            <input type="text" th:field="*{lastName2}" class="form-control"/>
+            <input type="text" th:field="*{apellido2}" class="form-control"/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-geo-alt"></i> Dirección</label>
+            <label class="form-label"><i class="bi bi-geo-alt"></i> Dirección *</label>
             <input type="text" th:field="*{direccion}" class="form-control" required/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-envelope"></i> Correo</label>
-            <input type="email" th:field="*{email}" class="form-control" required/>
+            <label class="form-label"><i class="bi bi-envelope"></i> Correo *</label>
+            <input type="email" th:field="*{correo}" class="form-control" required/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Ingreso</label>
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Ingreso *</label>
             <input type="date" th:field="*{fechaIngreso}" class="form-control" required/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label"><i class="bi bi-person-badge"></i> Tipo de Cliente</label>
-            <select th:field="*{customerType}" class="form-control" required>
+            <label class="form-label"><i class="bi bi-person-badge"></i> Tipo de Cliente *</label>
+            <select th:field="*{tipoCliente}" class="form-control" required>
+                <option value="">-- Seleccione --</option>
                 <option value="Regular">Regular</option>
                 <option value="Empresarial">Empresarial</option>
                 <option value="VIP">VIP</option>

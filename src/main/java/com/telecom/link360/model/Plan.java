@@ -5,12 +5,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "[PLAN_TARIFARIO]")
+@Table(name = "PLAN_TARIFARIO")
 public class Plan {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CodPlan")
-    private Integer id;
+    private Integer codPlan;
 
     @Column(name = "CodCategoria", nullable = false)
     private Integer codCategoria;
@@ -25,13 +26,13 @@ public class Plan {
     private BigDecimal cuotaMensual;
 
     @Column(name = "GigabytesIncluidos", nullable = false)
-    private Integer gigabytes;
+    private Integer gigabytesIncluidos;
 
     @Column(name = "MinutosIncluidos", nullable = false)
-    private Integer minutos;
+    private Integer minutosIncluidos;
 
     @Column(name = "MensajesIncluidos", nullable = false)
-    private Integer mensajes;
+    private Integer mensajesIncluidos;
 
     @Column(name = "CostoExceso", nullable = false, precision = 10, scale = 2)
     private BigDecimal costoExceso;
@@ -51,116 +52,48 @@ public class Plan {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public Plan() {}
+
     // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
+    public Integer getCodPlan() { return codPlan; }
+    public void setCodPlan(Integer codPlan) { this.codPlan = codPlan; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public Integer getCodCategoria() { return codCategoria; }
+    public void setCodCategoria(Integer codCategoria) { this.codCategoria = codCategoria; }
 
-    public Integer getCodCategoria() {
-        return codCategoria;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setCodCategoria(Integer codCategoria) {
-        this.codCategoria = codCategoria;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public BigDecimal getCuotaMensual() { return cuotaMensual; }
+    public void setCuotaMensual(BigDecimal cuotaMensual) { this.cuotaMensual = cuotaMensual; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public Integer getGigabytesIncluidos() { return gigabytesIncluidos; }
+    public void setGigabytesIncluidos(Integer gigabytesIncluidos) { this.gigabytesIncluidos = gigabytesIncluidos; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public Integer getMinutosIncluidos() { return minutosIncluidos; }
+    public void setMinutosIncluidos(Integer minutosIncluidos) { this.minutosIncluidos = minutosIncluidos; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public Integer getMensajesIncluidos() { return mensajesIncluidos; }
+    public void setMensajesIncluidos(Integer mensajesIncluidos) { this.mensajesIncluidos = mensajesIncluidos; }
 
-    public BigDecimal getCuotaMensual() {
-        return cuotaMensual;
-    }
+    public BigDecimal getCostoExceso() { return costoExceso; }
+    public void setCostoExceso(BigDecimal costoExceso) { this.costoExceso = costoExceso; }
 
-    public void setCuotaMensual(BigDecimal cuotaMensual) {
-        this.cuotaMensual = cuotaMensual;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public Integer getGigabytes() {
-        return gigabytes;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setGigabytes(Integer gigabytes) {
-        this.gigabytes = gigabytes;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public Integer getMinutos() {
-        return minutos;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setMinutos(Integer minutos) {
-        this.minutos = minutos;
-    }
-
-    public Integer getMensajes() {
-        return mensajes;
-    }
-
-    public void setMensajes(Integer mensajes) {
-        this.mensajes = mensajes;
-    }
-
-    public BigDecimal getCostoExceso() {
-        return costoExceso;
-    }
-
-    public void setCostoExceso(BigDecimal costoExceso) {
-        this.costoExceso = costoExceso;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

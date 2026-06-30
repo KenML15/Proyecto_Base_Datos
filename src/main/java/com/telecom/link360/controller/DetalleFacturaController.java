@@ -44,14 +44,10 @@ public class DetalleFacturaController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveDetalleFactura(@ModelAttribute DetalleFactura detalle) {
-        // Generar ID manual para IdLineaDetalle si es nuevo
+        // Asignar Id_LineaDetalle manualmente si es un registro nuevo
         if (detalle.getIdLineaDetalle() == null) {
-            Integer maxId = detalleFacturaRepository.findAll()
-                    .stream()
-                    .map(DetalleFactura::getIdLineaDetalle)
-                    .max(Integer::compare)
-                    .orElse(0);
-            detalle.setIdLineaDetalle(maxId + 1);
+            Integer maxId = detalleFacturaRepository.findMaxIdLineaDetalleByNumFactura(detalle.getNumFactura());
+            detalle.setIdLineaDetalle(maxId == null ? 1 : maxId + 1);
         }
 
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)

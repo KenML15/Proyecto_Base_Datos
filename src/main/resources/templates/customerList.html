@@ -11,10 +11,10 @@
 <div class="container l360-page">
     <div class="page-header">
         <div>
-            <h2><span class="page-header-icon"><i class="bi bi-people-fill"></i></span> Gestión de Clientes</h2>
-            <p class="page-subtitle">Administra la información de los clientes registrados en la plataforma.</p>
+            <h2><span class="page-header-icon"><i class="bi bi-person-lines-fill"></i></span> Gestión de Clientes</h2>
+            <p class="page-subtitle">Visualiza y administra todos los clientes del sistema.</p>
         </div>
-        <a href="/customers/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Registrar Nuevo Cliente</a>
+        <a href="/customers/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Nuevo Cliente</a>
     </div>
 
     <div class="l360-card table-card">
@@ -24,28 +24,41 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Primer Apellido</th>
+                    <th>Apellidos</th>
                     <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Tipo Cliente</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
+                <!-- CORREGIDO: Usar c.idCliente en lugar de c.id -->
                 <tr th:each="c : ${customers}">
-                    <td class="mono" th:text="${c.id}"></td>
-                    <td th:text="${c.firstName}"></td>
-                    <td th:text="${c.lastName1}"></td>
-                    <td th:text="${c.email}"></td>
+                    <td class="mono" th:text="${c.idCliente}"></td>
+                    <td th:text="${c.nombre}"></td>
+                    <td th:text="${c.apellido1 + ' ' + (c.apellido2 != null ? c.apellido2 : '')}"></td>
+                    <td class="mono" th:text="${c.correo}"></td>
+                    <td class="mono" th:text="${c.direccion}"></td>
+                    <td><span class="chip chip-blue"><i class="bi bi-person-badge"></i> <span th:text="${c.tipoCliente}"></span></span></td>
+                    <td>
+                        <span class="status-badge" th:classappend="${c.status == 'A' ? 'status-active' : 'status-inactive'}">
+                            <i class="bi bi-circle-fill"></i>
+                            <span th:text="${c.status == 'A' ? 'Activo' : 'Inactivo'}"></span>
+                        </span>
+                    </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a th:href="@{/customers/edit/{id}(id=${c.id})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/customers/delete/{id}(id=${c.id})}"
+                            <!-- CORREGIDO: Usar c.idCliente en lugar de c.id -->
+                            <a th:href="@{/customers/edit/{id}(id=${c.idCliente})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/customers/delete/{id}(id=${c.idCliente})}"
                                class="btn btn-danger btn-sm"
-                               onclick="return confirm('¿Está seguro de eliminar a este cliente?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                               onclick="return confirm('¿Está seguro de eliminar este cliente?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
                         </div>
                     </td>
                 </tr>
                 <tr th:if="${customers.empty}">
-                    <td colspan="5">
+                    <td colspan="8">
                         <div class="empty-state">
                             <i class="bi bi-inbox"></i>
                             No hay clientes registrados actualmente.

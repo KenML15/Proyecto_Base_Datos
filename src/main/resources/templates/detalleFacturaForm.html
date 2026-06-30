@@ -24,7 +24,7 @@
                 <option value="" disabled selected>Seleccione una factura...</option>
                 <option th:each="f : ${facturas}"
                         th:value="${f.numFactura}"
-                        th:text="${'Factura ' + f.numFactura + ' - ' + f.cliente.firstName + ' ' + f.cliente.lastName1}">
+                        th:text="${'Factura ' + f.numFactura + ' - ' + f.cliente.nombre + ' ' + f.cliente.apellido1}">
                 </option>
             </select>
         </div>
@@ -46,7 +46,7 @@
                 <option value="" disabled selected>Seleccione un consumo...</option>
                 <option th:each="c : ${consumos}"
                         th:value="${c.idConsumo}"
-                        th:text="${'ID: ' + c.idConsumo + ' - ' + c.lineaMovil.numeroTelefono}">
+                        th:text="${'ID: ' + c.idConsumo + ' - ' + c.lineaMovil.numTelefono}">
                 </option>
             </select>
         </div>

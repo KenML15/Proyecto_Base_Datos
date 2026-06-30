@@ -1,120 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Formulario de Factura · Link360</title>
-  <th:block th:replace="~{fragments :: headAssets}"></th:block>
+    <title>Formulario de Factura · Link360</title>
+    <th:block th:replace="~{fragments :: headAssets}"></th:block>
 </head>
 <body>
 
 <div th:replace="~{fragments :: navbar}"></div>
 
 <div class="container l360-page l360-page-narrow">
-  <div class="page-header">
-    <div>
-      <h2><span class="page-header-icon"><i class="bi bi-receipt-fill"></i></span> Datos de Factura</h2>
-      <p class="page-subtitle">Registra una nueva factura para un cliente.</p>
-    </div>
-  </div>
-
-  <form th:action="@{/facturas/save}" th:object="${factura}" method="post" class="l360-card form-card">
-
-    <input type="hidden" th:field="*{numFactura}" />
-
-    <div class="mb-3" th:if="${factura.numFactura != null}">
-      <label class="form-label"><i class="bi bi-fingerprint"></i> Nº de Factura</label>
-      <input type="text" th:value="${factura.numFactura}" class="form-control" readonly disabled />
+    <div class="page-header">
+        <div>
+            <h2><span class="page-header-icon"><i class="bi bi-receipt-fill"></i></span> Datos de Factura</h2>
+            <p class="page-subtitle">Registra una nueva factura para un cliente.</p>
+        </div>
     </div>
 
-    <div class="mb-3" th:if="${factura.numFactura == null}">
-      <label class="form-label"><i class="bi bi-fingerprint"></i> Nº de Factura (Automático)</label>
-      <input type="text" class="form-control" readonly value="Se asignará automáticamente" />
-    </div>
+    <form th:action="@{/facturas/save}" th:object="${factura}" method="post" class="l360-card form-card">
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-person"></i> Cliente *</label>
-      <select th:field="*{cliente}" class="form-control" required>
-        <option value="" disabled selected>Seleccione un cliente...</option>
-        <option th:each="c : ${clientes}"
-                th:value="${c.id}"
-                th:text="${c.firstName + ' ' + c.lastName1 + ' (ID: ' + c.id + ')'}">
-        </option>
-      </select>
-    </div>
+        <input type="hidden" th:field="*{numFactura}" />
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Emisión *</label>
-      <input type="date" th:field="*{fechaEmision}" class="form-control" required/>
-    </div>
+        <div class="mb-3" th:if="${factura.numFactura != null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Nº de Factura</label>
+            <input type="text" th:value="${factura.numFactura}" class="form-control" readonly disabled />
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Fin *</label>
-      <input type="date" th:field="*{fechaFin}" class="form-control" required/>
-    </div>
+        <div class="mb-3" th:if="${factura.numFactura == null}">
+            <label class="form-label"><i class="bi bi-fingerprint"></i> Nº de Factura (Automático)</label>
+            <input type="text" class="form-control" readonly value="Se asignará automáticamente" />
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-percent"></i> Descuento Época</label>
-      <input type="number" th:field="*{descEpoca}" class="form-control" step="0.01" min="0"/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-person"></i> Cliente *</label>
+            <select th:field="*{cliente}" class="form-control" required>
+                <option value="" disabled selected>Seleccione un cliente...</option>
+                <option th:each="c : ${clientes}"
+                        th:value="${c.idCliente}"
+                        th:text="${c.nombre + ' ' + c.apellido1 + ' (ID: ' + c.idCliente + ')'}">
+                </option>
+            </select>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-tag"></i> Código de Rango *</label>
-      <input type="number" th:field="*{codRango}" class="form-control" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Emisión *</label>
+            <input type="date" th:field="*{fechaEmision}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-clock-history"></i> Franja Horaria *</label>
-      <select th:field="*{franjaHoraria}" class="form-control" required>
-        <option value="" disabled selected>Seleccione una franja...</option>
-        <option th:each="f : ${franjas}"
-                th:value="${f.idFranja}"
-                th:text="${f.descripcion}">
-        </option>
-      </select>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha de Fin *</label>
+            <input type="date" th:field="*{fechaFin}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-percent"></i> Descuento Franja-Rango</label>
-      <input type="number" th:field="*{descFrRan}" class="form-control" step="0.01" min="0"/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-percent"></i> Descuento Época</label>
+            <input type="number" th:field="*{descEpoca}" class="form-control" step="0.01" min="0"/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-gift"></i> Puntos Redimidos</label>
-      <input type="number" th:field="*{ptsRedimidos}" class="form-control" min="0"/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-tag"></i> Código de Rango *</label>
+            <input type="number" th:field="*{codRango}" class="form-control" required/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-cash-coin"></i> Importe Puntos Redimidos</label>
-      <input type="number" th:field="*{impPtsRedimidos}" class="form-control" step="0.01" min="0"/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-clock-history"></i> Franja Horaria *</label>
+            <select th:field="*{franjaHoraria}" class="form-control" required>
+                <option value="" disabled selected>Seleccione una franja...</option>
+                <option th:each="f : ${franjas}"
+                        th:value="${f.idFranja}"
+                        th:text="${f.descripcion}">
+                </option>
+            </select>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-cash-coin"></i> Monto Subtotal *</label>
-      <input type="number" th:field="*{montoSubtotal}" class="form-control" step="0.01" min="0" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-percent"></i> Descuento Franja-Rango</label>
+            <input type="number" th:field="*{descFRRan}" class="form-control" step="0.01" min="0"/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-percent"></i> Monto Impuesto *</label>
-      <input type="number" th:field="*{montoImpuesto}" class="form-control" step="0.01" min="0" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-gift"></i> Puntos Redimidos</label>
+            <input type="number" th:field="*{ptsRedimidos}" class="form-control" min="0"/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-cash-coin"></i> Monto Total *</label>
-      <input type="number" th:field="*{montoTotal}" class="form-control" step="0.01" min="0" required/>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-cash-coin"></i> Importe Puntos Redimidos</label>
+            <input type="number" th:field="*{impPtsRedimidos}" class="form-control" step="0.01" min="0"/>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
-      <select th:field="*{status}" class="form-control" required>
-        <option value="A">Activo</option>
-        <option value="I">Inactivo</option>
-      </select>
-    </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-cash-coin"></i> Monto Subtotal *</label>
+            <input type="number" th:field="*{montoSubtotal}" class="form-control" step="0.01" min="0" required/>
+        </div>
 
-    <div class="d-grid gap-2 mt-4">
-      <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Factura</button>
-      <a href="/facturas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
-    </div>
-  </form>
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-percent"></i> Monto Impuesto *</label>
+            <input type="number" th:field="*{montoImpuesto}" class="form-control" step="0.01" min="0" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-cash-coin"></i> Monto Total *</label>
+            <input type="number" th:field="*{montoTotal}" class="form-control" step="0.01" min="0" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
+            <select th:field="*{status}" class="form-control" required>
+                <option value="A">Activo</option>
+                <option value="I">Inactivo</option>
+            </select>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Factura</button>
+            <a href="/facturas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
+        </div>
+    </form>
 </div>
 
 <div th:replace="~{fragments :: footer}"></div>
