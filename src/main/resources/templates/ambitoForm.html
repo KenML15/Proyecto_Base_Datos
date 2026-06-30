@@ -12,27 +12,43 @@
     <div class="page-header">
         <div>
             <h2><span class="page-header-icon"><i class="bi bi-globe2"></i></span> Datos del Ámbito</h2>
-            <p class="page-subtitle">Define el código y nombre del ámbito de cobertura o aplicación.</p>
+            <p class="page-subtitle">Define el nombre y descripción del ámbito de cobertura.</p>
         </div>
     </div>
 
     <form th:action="@{/ambitos/save}" th:object="${ambito}" method="post" class="l360-card form-card">
 
-        <div class="mb-3" th:if="${ambito.code != null}">
+        <input type="hidden" th:field="*{codAmbito}" />
+
+        <!-- MOSTRAR ID SOLO EN EDICIÓN -->
+        <div class="mb-3" th:if="${ambito.codAmbito != null}">
             <label class="form-label"><i class="bi bi-fingerprint"></i> Código de Ámbito</label>
-            <input type="text" th:value="${ambito.code}" class="form-control" readonly disabled />
-            <input type="hidden" th:field="*{code}" />
+            <input type="text" th:value="${ambito.codAmbito}" class="form-control" readonly disabled />
         </div>
 
-        <div class="mb-3" th:if="${ambito.code == null}">
-            <label class="form-label"><i class="bi bi-fingerprint"></i> Código de Ámbito *</label>
-            <input type="text" th:field="*{code}" class="form-control" required maxlength="10" placeholder="Ej: NAC, INT, LOC"/>
-            <small class="form-text">Código corto y único que identifica el ámbito.</small>
+        <!-- MOSTRAR MENSAJE EN NUEVO REGISTRO -->
+        <div class="mb-3" th:if="${ambito.codAmbito == null}">
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle"></i> El código se asignará automáticamente al guardar.
+            </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"><i class="bi bi-card-text"></i> Nombre *</label>
-            <input type="text" th:field="*{name}" class="form-control" required placeholder="Ej: Nacional, Internacional, Local"/>
+            <input type="text" th:field="*{nombre}" class="form-control" required placeholder="Ej: Nacional, Internacional, Local"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-card-text"></i> Descripción</label>
+            <textarea th:field="*{descripcion}" class="form-control" rows="3" placeholder="Descripción detallada del ámbito"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
+            <select th:field="*{status}" class="form-control" required>
+                <option value="A">Activo</option>
+                <option value="I">Inactivo</option>
+            </select>
         </div>
 
         <div class="d-grid gap-2 mt-4">

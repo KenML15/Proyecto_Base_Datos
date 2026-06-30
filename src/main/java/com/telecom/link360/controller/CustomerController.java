@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
@@ -31,32 +35,58 @@ public class CustomerController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveCustomer(@ModelAttribute Customer customer) {
-        if (customer.getId() == null) {
-            // Buscamos el ID máximo actual en la BD y sumamos 1
-            Integer maxId = customerRepository.findAll()
-                    .stream()
-                    .map(Customer::getId)
-                    .max(Integer::compare)
-                    .orElse(0);
-            customer.setId(maxId + 1);
+
+        if (customer.getNombre() == null || customer.getNombre().isEmpty()) {
+            throw new IllegalArgumentException("El nombre es obligatorio");
         }
+        if (customer.getApellido1() == null || customer.getApellido1().isEmpty()) {
+            throw new IllegalArgumentException("El primer apellido es obligatorio");
+        }
+        if (customer.getCorreo() == null || customer.getCorreo().isEmpty()) {
+            throw new IllegalArgumentException("El correo es obligatorio");
+        }
+
+        if (customer.getFechaIngreso() == null) {
+            customer.setFechaIngreso(Date.valueOf(LocalDate.now()));
+        }
+
+        if (customer.getCreatedBy() == null || customer.getCreatedBy().isEmpty()) {
+            customer.setCreatedBy("admin");
+        }
+        if (customer.getCreatedAt() == null) {
+            customer.setCreatedAt(LocalDateTime.now());
+        }
+
+        if (customer.getIdCliente() != null && customerRepository.existsById(customer.getIdCliente())) {
+            customer.setModifiedBy("admin");
+            customer.setModifiedAt(LocalDateTime.now());
+        }
+
+        if (customer.getStatus() == null || customer.getStatus().isEmpty()) {
+            customer.setStatus("A");
+        }
+
+        if (customer.getTipoCliente() == null || customer.getTipoCliente().isEmpty()) {
+            customer.setTipoCliente("Regular");
+        }
+
         customerRepository.save(customer);
         return "redirect:/customers";
     }
 
+    // EDITAR (Cargar datos)
     @GetMapping("/edit/{id}")
-    public String editCustomer(@PathVariable Integer id, Model model) {
+    public String editCustomer(@PathVariable("id") Integer id, Model model) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID de cliente inválido: " + id));
         model.addAttribute("customer", customer);
         return "customerForm";
     }
 
-    // BORRAR
+    // ELIMINAR
     @GetMapping("/delete/{id}")
-    public String deleteCustomer(@PathVariable Integer id) {
+    public String deleteCustomer(@PathVariable("id") Integer id) {
         customerRepository.deleteById(id);
         return "redirect:/customers";
     }
-
 }

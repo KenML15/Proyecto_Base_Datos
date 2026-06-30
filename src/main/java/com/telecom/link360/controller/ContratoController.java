@@ -44,19 +44,8 @@ public class ContratoController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveContrato(@ModelAttribute Contrato contrato) {
-        // Generar ID manual si es nuevo
-        if (contrato.getNumContrato() == null) {
-            Integer maxId = contratoRepository.findAll()
-                    .stream()
-                    .map(Contrato::getNumContrato)
-                    .max(Integer::compare)
-                    .orElse(0);
-            contrato.setNumContrato(maxId + 1);
-        }
-
-        // Asignar valores por defecto si es necesario
         if (contrato.getFechaFirma() == null) {
-            contrato.setFechaFirma(LocalDate.now());
+            contrato.setFechaFirma(new java.sql.Date(System.currentTimeMillis()));
         }
 
         if (contrato.getCreatedBy() == null || contrato.getCreatedBy().isEmpty()) {

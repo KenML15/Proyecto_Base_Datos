@@ -11,8 +11,8 @@
 <div class="container l360-page">
     <div class="page-header">
         <div>
-            <h2><span class="page-header-icon"><i class="bi bi-sim-fill"></i></span> Gestión de Líneas Móviles</h2>
-            <p class="page-subtitle">Administra las líneas asignadas a cada cliente.</p>
+            <h2><span class="page-header-icon"><i class="bi bi-phone-fill"></i></span> Gestión de Líneas Móviles</h2>
+            <p class="page-subtitle">Visualiza y administra todas las líneas telefónicas registradas.</p>
         </div>
         <a href="/lineas/new" class="btn btn-l360-primary"><i class="bi bi-plus-lg"></i> Nueva Línea</a>
     </div>
@@ -22,36 +22,47 @@
             <table class="table table-hover l360-table">
                 <thead>
                 <tr>
-                    <th>Número de Teléfono</th>
+                    <th>Teléfono</th>
                     <th>Cliente</th>
-                    <th>Estado</th>
+                    <th>Tipo de Línea</th>
+                    <th>Tecnología</th>
+                    <th>Fecha Activación</th>
+                    <th>Estado Línea</th>
+                    <th>Tipo SIM</th>
+                    <th>Estado Registro</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="l : ${lineas}">
-                    <td class="mono" th:text="${l.numeroTelefono}"></td>
-                    <td th:text="${l.customer.firstName + ' ' + l.customer.lastName1}"></td>
+                    <td class="mono" th:text="${l.numTelefono}"></td>
+                    <td th:text="${l.cliente.nombre + ' ' + l.cliente.apellido1}"></td>
+                    <td><span class="chip chip-blue" th:text="${l.tipoLinea}"></span></td>
+                    <td th:text="${l.tecnologia}"></td>
+                    <!-- ✅ CORREGIDO: Cambiar de #temporals a #dates para java.sql.Date -->
+                    <td class="mono" th:text="${#dates.format(l.fechaActivacion, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${l.estadoLinea}"></td>
+                    <td th:text="${l.tipoSIM}"></td>
                     <td>
-                        <span class="status-badge" th:classappend="${l.estado == 'A' ? 'status-active' : 'status-inactive'}">
+                        <span class="status-badge" th:classappend="${l.status == 'A' ? 'status-active' : 'status-inactive'}">
                             <i class="bi bi-circle-fill"></i>
-                            <span th:text="${l.estado == 'A' ? 'Activo' : 'Inactivo'}"></span>
+                            <span th:text="${l.status == 'A' ? 'Activo' : 'Inactivo'}"></span>
                         </span>
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a th:href="@{/lineas/edit/{id}(id=${l.numeroTelefono})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/lineas/delete/{id}(id=${l.numeroTelefono})}"
+                            <a th:href="@{/lineas/edit/{id}(id=${l.numTelefono})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/lineas/delete/{id}(id=${l.numTelefono})}"
                                class="btn btn-danger btn-sm"
                                onclick="return confirm('¿Está seguro de eliminar esta línea?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
                         </div>
                     </td>
                 </tr>
                 <tr th:if="${lineas.empty}">
-                    <td colspan="4">
+                    <td colspan="9">
                         <div class="empty-state">
                             <i class="bi bi-inbox"></i>
-                            No hay líneas móviles registradas.
+                            No hay líneas móviles registradas actualmente.
                         </div>
                     </td>
                 </tr>

@@ -43,16 +43,6 @@ public class FacturaController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveFactura(@ModelAttribute Factura factura) {
-        // Generar ID manual si es nuevo
-        if (factura.getNumFactura() == null) {
-            Integer maxId = facturaRepository.findAll()
-                    .stream()
-                    .map(Factura::getNumFactura)
-                    .max(Integer::compare)
-                    .orElse(0);
-            factura.setNumFactura(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (factura.getCreatedBy() == null || factura.getCreatedBy().isEmpty()) {
             factura.setCreatedBy("admin");

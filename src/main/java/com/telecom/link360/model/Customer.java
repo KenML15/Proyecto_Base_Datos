@@ -2,64 +2,92 @@ package com.telecom.link360.model;
 
 import jakarta.persistence.*;
 import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "CLIENTE")
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Cliente")
-    private Integer id; // Quitamos @GeneratedValue porque tu tabla no es IDENTITY
+    private Integer idCliente;
 
     @Column(name = "Nombre", nullable = false)
-    private String firstName;
+    private String nombre;
 
     @Column(name = "Apellido1", nullable = false)
-    private String lastName1;
+    private String apellido1;
 
     @Column(name = "Apellido2")
-    private String lastName2;
+    private String apellido2;
 
     @Column(name = "Direccion", nullable = false)
-    private String direccion; // Campo obligatorio en tu SQL
+    private String direccion;
 
     @Column(name = "Correo", nullable = false)
-    private String email;
+    private String correo;
 
     @Column(name = "FechaIngreso", nullable = false)
-    private Date fechaIngreso; // Campo obligatorio en tu SQL
+    private Date fechaIngreso;
 
     @Column(name = "TipoCliente", nullable = false)
-    private String customerType;
+    private String tipoCliente;
 
     @Column(name = "Status", nullable = false, length = 1)
-    private String status;
+    private String status = "A";
 
     @Column(name = "CreatedBy", nullable = false)
-    private String createdBy = "admin"; // Valor por defecto
+    private String createdBy = "admin";
+
+    @Column(name = "CreatedAt", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "ModifiedBy")
+    private String modifiedBy;
+
+    @Column(name = "ModifiedAt")
+    private LocalDateTime modifiedAt;
 
     public Customer() {}
 
     // Getters y Setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public String getLastName1() { return lastName1; }
-    public void setLastName1(String lastName1) { this.lastName1 = lastName1; }
-    public String getLastName2() { return lastName2; }
-    public void setLastName2(String lastName2) { this.lastName2 = lastName2; }
+    public Integer getIdCliente() { return idCliente; }
+    public void setIdCliente(Integer idCliente) { this.idCliente = idCliente; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getApellido1() { return apellido1; }
+    public void setApellido1(String apellido1) { this.apellido1 = apellido1; }
+
+    public String getApellido2() { return apellido2; }
+    public void setApellido2(String apellido2) { this.apellido2 = apellido2; }
+
     public String getDireccion() { return direccion; }
     public void setDireccion(String direccion) { this.direccion = direccion; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
+
     public Date getFechaIngreso() { return fechaIngreso; }
     public void setFechaIngreso(Date fechaIngreso) { this.fechaIngreso = fechaIngreso; }
-    public String getCustomerType() { return customerType; }
-    public void setCustomerType(String customerType) { this.customerType = customerType; }
+
+    public String getTipoCliente() { return tipoCliente; }
+    public void setTipoCliente(String tipoCliente) { this.tipoCliente = tipoCliente; }
+
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
     public String getCreatedBy() { return createdBy; }
     public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
+
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 }

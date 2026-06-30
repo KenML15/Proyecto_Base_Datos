@@ -48,16 +48,6 @@ public class ConsumoController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveConsumo(@ModelAttribute Consumo consumo) {
-        // Generar ID manual si es nuevo
-        if (consumo.getIdConsumo() == null) {
-            Integer maxId = consumoRepository.findAll()
-                    .stream()
-                    .map(Consumo::getIdConsumo)
-                    .max(Integer::compare)
-                    .orElse(0);
-            consumo.setIdConsumo(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (consumo.getCreatedBy() == null || consumo.getCreatedBy().isEmpty()) {
             consumo.setCreatedBy("admin");

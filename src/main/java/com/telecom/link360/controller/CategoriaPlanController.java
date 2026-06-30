@@ -33,16 +33,6 @@ public class CategoriaPlanController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String saveCategoria(@ModelAttribute CategoriaPlan categoria) {
-        // Generar ID manual si es nuevo
-        if (categoria.getCodCategoria() == null) {
-            Integer maxId = categoriaPlanRepository.findAll()
-                    .stream()
-                    .map(CategoriaPlan::getCodCategoria)
-                    .max(Integer::compare)
-                    .orElse(0);
-            categoria.setCodCategoria(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (categoria.getCreatedBy() == null || categoria.getCreatedBy().isEmpty()) {
             categoria.setCreatedBy("admin");

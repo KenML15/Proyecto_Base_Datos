@@ -33,16 +33,6 @@ public class FranjaHorariaController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String savefranja(@ModelAttribute FranjaHoraria franja) {
-        // Generar ID manual si es nuevo
-        if (franja.getIdFranja() == null) {
-            Integer maxId = franjaHorariaRepository.findAll()
-                    .stream()
-                    .map(FranjaHoraria::getIdFranja)
-                    .max(Integer::compare)
-                    .orElse(0);
-            franja.setIdFranja(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (franja.getCreatedBy() == null || franja.getCreatedBy().isEmpty()) {
             franja.setCreatedBy("admin");

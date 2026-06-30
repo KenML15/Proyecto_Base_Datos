@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class Consumo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Consumo")
     private Integer idConsumo;
 
@@ -54,116 +55,48 @@ public class Consumo {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public Consumo() {}
+
     // Getters y Setters
-    public Integer getIdConsumo() {
-        return idConsumo;
-    }
+    public Integer getIdConsumo() { return idConsumo; }
+    public void setIdConsumo(Integer idConsumo) { this.idConsumo = idConsumo; }
 
-    public void setIdConsumo(Integer idConsumo) {
-        this.idConsumo = idConsumo;
-    }
+    public LineaMovil getLineaMovil() { return lineaMovil; }
+    public void setLineaMovil(LineaMovil lineaMovil) { this.lineaMovil = lineaMovil; }
 
-    public LineaMovil getLineaMovil() {
-        return lineaMovil;
-    }
+    public Ambito getAmbito() { return ambito; }
+    public void setAmbito(Ambito ambito) { this.ambito = ambito; }
 
-    public void setLineaMovil(LineaMovil lineaMovil) {
-        this.lineaMovil = lineaMovil;
-    }
+    public FranjaHoraria getFranjaHoraria() { return franjaHoraria; }
+    public void setFranjaHoraria(FranjaHoraria franjaHoraria) { this.franjaHoraria = franjaHoraria; }
 
-    public Ambito getAmbito() {
-        return ambito;
-    }
+    public LocalDateTime getFechaHoraInicio() { return fechaHoraInicio; }
+    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) { this.fechaHoraInicio = fechaHoraInicio; }
 
-    public void setAmbito(Ambito ambito) {
-        this.ambito = ambito;
-    }
+    public LocalDateTime getFechaHoraFin() { return fechaHoraFin; }
+    public void setFechaHoraFin(LocalDateTime fechaHoraFin) { this.fechaHoraFin = fechaHoraFin; }
 
-    public FranjaHoraria getFranjaHoraria() {
-        return franjaHoraria;
-    }
+    public String getTipoConsumo() { return tipoConsumo; }
+    public void setTipoConsumo(String tipoConsumo) { this.tipoConsumo = tipoConsumo; }
 
-    public void setFranjaHoraria(FranjaHoraria franjaHoraria) {
-        this.franjaHoraria = franjaHoraria;
-    }
+    public BigDecimal getCantidadConsumida() { return cantidadConsumida; }
+    public void setCantidadConsumida(BigDecimal cantidadConsumida) { this.cantidadConsumida = cantidadConsumida; }
 
-    public LocalDateTime getFechaHoraInicio() {
-        return fechaHoraInicio;
-    }
+    public BigDecimal getCosto() { return costo; }
+    public void setCosto(BigDecimal costo) { this.costo = costo; }
 
-    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public LocalDateTime getFechaHoraFin() {
-        return fechaHoraFin;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setFechaHoraFin(LocalDateTime fechaHoraFin) {
-        this.fechaHoraFin = fechaHoraFin;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public String getTipoConsumo() {
-        return tipoConsumo;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setTipoConsumo(String tipoConsumo) {
-        this.tipoConsumo = tipoConsumo;
-    }
-
-    public BigDecimal getCantidadConsumida() {
-        return cantidadConsumida;
-    }
-
-    public void setCantidadConsumida(BigDecimal cantidadConsumida) {
-        this.cantidadConsumida = cantidadConsumida;
-    }
-
-    public BigDecimal getCosto() {
-        return costo;
-    }
-
-    public void setCosto(BigDecimal costo) {
-        this.costo = costo;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

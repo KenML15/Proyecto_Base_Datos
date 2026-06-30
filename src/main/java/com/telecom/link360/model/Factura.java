@@ -2,7 +2,7 @@ package com.telecom.link360.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Factura {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NumFactura")
     private Integer numFactura;
 
@@ -18,10 +19,10 @@ public class Factura {
     private Customer cliente;
 
     @Column(name = "FechaEmision", nullable = false)
-    private LocalDate fechaEmision;
+    private Date fechaEmision;
 
     @Column(name = "FechaFin", nullable = false)
-    private LocalDate fechaFin;
+    private Date fechaFin;
 
     @Column(name = "Desc_epoca", nullable = false, precision = 10, scale = 2)
     private BigDecimal descEpoca;
@@ -34,7 +35,7 @@ public class Factura {
     private FranjaHoraria franjaHoraria;
 
     @Column(name = "Desc_FR_Ran", nullable = false, precision = 10, scale = 2)
-    private BigDecimal descFrRan;
+    private BigDecimal descFRRan;
 
     @Column(name = "PtsRedimidos", nullable = false)
     private Integer ptsRedimidos;
@@ -66,148 +67,60 @@ public class Factura {
     @Column(name = "Status", nullable = false, length = 1)
     private String status = "A";
 
+    public Factura() {}
+
     // Getters y Setters
-    public Integer getNumFactura() {
-        return numFactura;
-    }
+    public Integer getNumFactura() { return numFactura; }
+    public void setNumFactura(Integer numFactura) { this.numFactura = numFactura; }
 
-    public void setNumFactura(Integer numFactura) {
-        this.numFactura = numFactura;
-    }
+    public Customer getCliente() { return cliente; }
+    public void setCliente(Customer cliente) { this.cliente = cliente; }
 
-    public Customer getCliente() {
-        return cliente;
-    }
+    public Date getFechaEmision() { return fechaEmision; }
+    public void setFechaEmision(Date fechaEmision) { this.fechaEmision = fechaEmision; }
 
-    public void setCliente(Customer cliente) {
-        this.cliente = cliente;
-    }
+    public Date getFechaFin() { return fechaFin; }
+    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
 
-    public LocalDate getFechaEmision() {
-        return fechaEmision;
-    }
+    public BigDecimal getDescEpoca() { return descEpoca; }
+    public void setDescEpoca(BigDecimal descEpoca) { this.descEpoca = descEpoca; }
 
-    public void setFechaEmision(LocalDate fechaEmision) {
-        this.fechaEmision = fechaEmision;
-    }
+    public Integer getCodRango() { return codRango; }
+    public void setCodRango(Integer codRango) { this.codRango = codRango; }
 
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
+    public FranjaHoraria getFranjaHoraria() { return franjaHoraria; }
+    public void setFranjaHoraria(FranjaHoraria franjaHoraria) { this.franjaHoraria = franjaHoraria; }
 
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+    public BigDecimal getDescFRRan() { return descFRRan; }
+    public void setDescFRRan(BigDecimal descFRRan) { this.descFRRan = descFRRan; }
 
-    public BigDecimal getDescEpoca() {
-        return descEpoca;
-    }
+    public Integer getPtsRedimidos() { return ptsRedimidos; }
+    public void setPtsRedimidos(Integer ptsRedimidos) { this.ptsRedimidos = ptsRedimidos; }
 
-    public void setDescEpoca(BigDecimal descEpoca) {
-        this.descEpoca = descEpoca;
-    }
+    public BigDecimal getImpPtsRedimidos() { return impPtsRedimidos; }
+    public void setImpPtsRedimidos(BigDecimal impPtsRedimidos) { this.impPtsRedimidos = impPtsRedimidos; }
 
-    public Integer getCodRango() {
-        return codRango;
-    }
+    public BigDecimal getMontoSubtotal() { return montoSubtotal; }
+    public void setMontoSubtotal(BigDecimal montoSubtotal) { this.montoSubtotal = montoSubtotal; }
 
-    public void setCodRango(Integer codRango) {
-        this.codRango = codRango;
-    }
+    public BigDecimal getMontoImpuesto() { return montoImpuesto; }
+    public void setMontoImpuesto(BigDecimal montoImpuesto) { this.montoImpuesto = montoImpuesto; }
 
-    public FranjaHoraria getFranjaHoraria() {
-        return franjaHoraria;
-    }
+    public BigDecimal getMontoTotal() { return montoTotal; }
+    public void setMontoTotal(BigDecimal montoTotal) { this.montoTotal = montoTotal; }
 
-    public void setFranjaHoraria(FranjaHoraria franjaHoraria) {
-        this.franjaHoraria = franjaHoraria;
-    }
+    public String getCreatedBy() { return createdBy; }
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public BigDecimal getDescFrRan() {
-        return descFrRan;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setDescFrRan(BigDecimal descFrRan) {
-        this.descFrRan = descFrRan;
-    }
+    public String getModifiedBy() { return modifiedBy; }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public Integer getPtsRedimidos() {
-        return ptsRedimidos;
-    }
+    public LocalDateTime getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(LocalDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public void setPtsRedimidos(Integer ptsRedimidos) {
-        this.ptsRedimidos = ptsRedimidos;
-    }
-
-    public BigDecimal getImpPtsRedimidos() {
-        return impPtsRedimidos;
-    }
-
-    public void setImpPtsRedimidos(BigDecimal impPtsRedimidos) {
-        this.impPtsRedimidos = impPtsRedimidos;
-    }
-
-    public BigDecimal getMontoSubtotal() {
-        return montoSubtotal;
-    }
-
-    public void setMontoSubtotal(BigDecimal montoSubtotal) {
-        this.montoSubtotal = montoSubtotal;
-    }
-
-    public BigDecimal getMontoImpuesto() {
-        return montoImpuesto;
-    }
-
-    public void setMontoImpuesto(BigDecimal montoImpuesto) {
-        this.montoImpuesto = montoImpuesto;
-    }
-
-    public BigDecimal getMontoTotal() {
-        return montoTotal;
-    }
-
-    public void setMontoTotal(BigDecimal montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public LocalDateTime getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(LocalDateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

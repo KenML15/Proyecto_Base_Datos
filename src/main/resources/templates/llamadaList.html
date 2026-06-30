@@ -23,6 +23,7 @@
                 <thead>
                 <tr>
                     <th>ID Consumo</th>
+                    <th>Línea</th>
                     <th>Destino</th>
                     <th>Tipo</th>
                     <th>Costo</th>
@@ -34,8 +35,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="l : ${llamadas}">
-                    <td class="mono" th:text="${l.idConsumo}"></td>
-                    <td class="mono" th:text="${l.numeroDestino}"></td>
+                    <td class="mono" th:text="${l.consumo.idConsumo}"></td>
+                    <td class="mono" th:text="${l.consumo.lineaMovil.numTelefono}"></td>
+                    <td class="mono" th:text="${l.numDestino}"></td>
                     <td th:text="${l.tipoLlamada}"></td>
                     <td class="mono" th:text="${'$' + #numbers.formatDecimal(l.costo, 1, 2)}"></td>
                     <td class="mono" th:text="${#temporals.format(l.fechaInicial, 'dd/MM/yyyy HH:mm')}"></td>
@@ -48,15 +50,15 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a th:href="@{/llamadas/edit/{id}(id=${l.idConsumo})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
-                            <a th:href="@{/llamadas/delete/{id}(id=${l.idConsumo})}"
+                            <a th:href="@{/llamadas/edit/{id}(id=${l.consumo.idConsumo})}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-fill"></i> Editar</a>
+                            <a th:href="@{/llamadas/delete/{id}(id=${l.consumo.idConsumo})}"
                                class="btn btn-danger btn-sm"
                                onclick="return confirm('¿Está seguro de eliminar esta llamada?');"><i class="bi bi-trash-fill"></i> Eliminar</a>
                         </div>
                     </td>
                 </tr>
                 <tr th:if="${llamadas.empty}">
-                    <td colspan="8">
+                    <td colspan="9">
                         <div class="empty-state">
                             <i class="bi bi-inbox"></i>
                             No hay llamadas registradas actualmente.

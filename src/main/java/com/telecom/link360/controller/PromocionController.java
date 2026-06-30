@@ -33,16 +33,6 @@ public class PromocionController {
     // GUARDAR (POST)
     @PostMapping("/save")
     public String savePromocion(@ModelAttribute Promocion promocion) {
-        // Generar ID manual si es nuevo
-        if (promocion.getCodPromocion() == null) {
-            Integer maxId = promocionRepository.findAll()
-                    .stream()
-                    .map(Promocion::getCodPromocion)
-                    .max(Integer::compare)
-                    .orElse(0);
-            promocion.setCodPromocion(maxId + 1);
-        }
-
         // Auditoría - CreatedAt y CreatedBy (solo para nuevos)
         if (promocion.getCreatedBy() == null || promocion.getCreatedBy().isEmpty()) {
             promocion.setCreatedBy("admin");

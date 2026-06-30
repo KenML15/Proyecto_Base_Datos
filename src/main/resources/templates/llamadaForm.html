@@ -12,34 +12,50 @@
   <div class="page-header">
     <div>
       <h2><span class="page-header-icon"><i class="bi bi-telephone-fill"></i></span> Datos de la Llamada</h2>
-      <p class="page-subtitle">Registra los detalles de una llamada realizada.</p>
+      <p class="page-subtitle">Registra los detalles de una llamada asociada a un consumo.</p>
     </div>
   </div>
 
   <form th:action="@{/llamadas/save}" th:object="${llamada}" method="post" class="l360-card form-card">
 
-    <input type="hidden" th:field="*{idConsumo}" />
+    <!-- MOSTRAR ID EN EDICIÓN -->
+    <div class="mb-3" th:if="${llamada.consumo != null && llamada.consumo.idConsumo != null}">
+      <label class="form-label"><i class="bi bi-fingerprint"></i> ID de Consumo (Clave Primaria)</label>
+      <input type="text" th:value="${llamada.consumo.idConsumo}" class="form-control" readonly disabled />
+      <input type="hidden" th:field="*{consumo}" />
+    </div>
 
+    <!-- MOSTRAR ALERTA EN NUEVO REGISTRO -->
+    <div class="mb-3" th:if="${llamada.consumo == null || llamada.consumo.idConsumo == null}">
+      <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-circle"></i> El ID de la llamada será el ID del consumo seleccionado.
+      </div>
+    </div>
+
+    <!-- SELECCIONAR CONSUMO (Obligatorio) -->
     <div class="mb-3">
-      <label class="form-label"><i class="bi bi-graph-up"></i> Consumo *</label>
+      <label class="form-label"><i class="bi bi-graph-up"></i> Consumo Asociado *</label>
       <select th:field="*{consumo}" class="form-control" required>
         <option value="" disabled selected>Seleccione un consumo...</option>
         <option th:each="c : ${consumos}"
                 th:value="${c.idConsumo}"
-                th:text="${'ID: ' + c.idConsumo + ' - ' + c.lineaMovil.numeroTelefono}">
+                th:text="${'ID: ' + c.idConsumo + ' - Línea: ' + c.lineaMovil.numTelefono + ' (' + #temporals.format(c.fechaHoraInicio, 'dd/MM/yyyy HH:mm') + ')'}">
         </option>
       </select>
+      <small class="form-text">Selecciona el consumo al que corresponde esta llamada</small>
     </div>
 
+    <!-- NÚMERO DESTINO -->
     <div class="mb-3">
-      <label class="form-label"><i class="bi bi-telephone"></i> Número de Destino *</label>
-      <input type="tel" th:field="*{numeroDestino}" class="form-control" placeholder="Ej: +34912345678" required/>
+      <label class="form-label"><i class="bi bi-telephone"></i> Número Destino *</label>
+      <input type="text" th:field="*{numDestino}" class="form-control" required placeholder="Ej: +34 912 345 678"/>
     </div>
 
+    <!-- TIPO DE LLAMADA -->
     <div class="mb-3">
-      <label class="form-label"><i class="bi bi-tag"></i> Tipo de Llamada *</label>
+      <label class="form-label"><i class="bi bi-type"></i> Tipo de Llamada *</label>
       <select th:field="*{tipoLlamada}" class="form-control" required>
-        <option value="" disabled selected>Seleccione tipo...</option>
+        <option value="">-- Seleccione --</option>
         <option value="Local">Local</option>
         <option value="Nacional">Nacional</option>
         <option value="Internacional">Internacional</option>
@@ -47,16 +63,19 @@
       </select>
     </div>
 
+    <!-- COSTO -->
     <div class="mb-3">
-      <label class="form-label"><i class="bi bi-cash-coin"></i> Costo *</label>
+      <label class="form-label"><i class="bi bi-cash-coin"></i> Costo ($) *</label>
       <input type="number" th:field="*{costo}" class="form-control" step="0.01" min="0" required/>
     </div>
 
+    <!-- FECHA/HORA INICIAL -->
     <div class="mb-3">
       <label class="form-label"><i class="bi bi-calendar-event"></i> Fecha/Hora Inicial *</label>
       <input type="datetime-local" th:field="*{fechaInicial}" class="form-control" required/>
     </div>
 
+    <!-- FRANJA HORARIA -->
     <div class="mb-3">
       <label class="form-label"><i class="bi bi-clock-history"></i> Franja Horaria *</label>
       <select th:field="*{franjaHoraria}" class="form-control" required>
@@ -68,6 +87,7 @@
       </select>
     </div>
 
+    <!-- ESTADO -->
     <div class="mb-3">
       <label class="form-label"><i class="bi bi-toggle-on"></i> Estado</label>
       <select th:field="*{status}" class="form-control" required>
@@ -76,6 +96,7 @@
       </select>
     </div>
 
+    <!-- BOTONES -->
     <div class="d-grid gap-2 mt-4">
       <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Guardar Llamada</button>
       <a href="/llamadas" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Cancelar</a>
